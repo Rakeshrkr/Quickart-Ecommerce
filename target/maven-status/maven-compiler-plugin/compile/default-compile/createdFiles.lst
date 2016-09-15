@@ -1,0 +1,9 @@
+com\quickart\controller\LoginController.class
+com\quickart\dao\ProductDao.class
+com\quickart\controller\RegisterController.class
+com\quickart\model\Product.class
+com\quickart\dao\impl\ProductDaoImpl.class
+com\quickart\controller\ProductController.class
+com\quickart\model\User.class
+com\quickart\service\impl\ProductServiceImpl.class
+com\quickart\service\ProductService.class
