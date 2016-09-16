@@ -50,8 +50,7 @@
 			<ul class="nav navbar-nav navbar-right">
 			    <li><a style="color:white" href="" id="cart"> <span 
 			            class="glyphicon glyphicon-shopping-cart"></span>Cart<span class="badge">0</span></a></li>
-				<li><a href="<c:url value="productTable"/>"><span
-						class="glyphicon "></span> Product</a></li>
+
 				<li><a href="ContactUs"><span
 						class="glyphicon glyphicon-earphone"></span> Contact Us</a></li>
 				<li><a href="Register"><span

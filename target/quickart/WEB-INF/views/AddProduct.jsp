@@ -1,9 +1,9 @@
 <%@ include file="Common-Header.jsp"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix = "form"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix = "spring"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -51,19 +51,21 @@
 						<br />
 						<div class="col-sm-12">
 							<div>
-								<form:form class="form-inline" method="post" action="adding" commandName="Product">
+								<form:form class="form-inline" method="post" action="addProduct"
+									commandName="Product">
 									<div class="form-group">
-										<form:label for="productName" path="productName">Product Name&nbsp;:</form:label> <form:input
-											type="text" class="form-control"
-											Style="background-color: #cce6ff;" name="productName" path="productName"
-											placeholder="Enter Product"/>
+										<form:label for="productName" path="productName">Product Name&nbsp;:</form:label>
+										<form:input type="text" class="form-control"
+											Style="background-color: #cce6ff;" name="productName"
+											path="productName" placeholder="Enter Product" />
 									</div>
 									
 									&nbsp;&nbsp;&nbsp;&nbsp;
 									<div class="form-group">
-										<form:label for="productCategory" path="productCategory">Product Category: </form:label> <form:select
-											class="form-control" Style="background-color: #cce6ff;"
-											name="productCategory" path="productCategory">
+										<form:label for="productCategory" path="productCategory">Product Category: </form:label>
+										<form:select class="form-control"
+											Style="background-color: #cce6ff;" name="productCategory"
+											path="productCategory">
 											<form:option value="Electronics">Electronics</form:option>
 											<form:option value="Men's Wearing">Men's Wearing</form:option>
 											<form:option value="Girl's Wearing">Girl's Wearing</form:option>
@@ -75,20 +77,22 @@
 									<div class="form-group"></div>
 									&nbsp;&nbsp;&nbsp;&nbsp;
 									<div class="form-group">
-										<form:label for="quantity" path="quantity">Quantity&nbsp;:</form:label> <form:select
-											class="form-control" path="quantity" Style="background-color: #cce6ff;"
-											name="quantity">
+										<form:label for="quantity" path="quantity">Quantity&nbsp;:</form:label>
+										<form:select class="form-control" path="quantity"
+											Style="background-color: #cce6ff;" name="quantity">
 											<form:option value="1">1</form:option>
 											<form:option value="2">2</form:option>
 											<form:option value="3">3</form:option>
 											<form:option value="4">4</form:option>
 										</form:select>
-									</div>
+									</div> 
+									
 									&nbsp;&nbsp;&nbsp;&nbsp;
 									<div class="form-group">
-										<form:label for="price" path="price">Price&nbsp;: </form:label> <form:input type="text"
-											class="form-control" Style="background-color: #cce6ff;"
-											name="price" placeholder="Enter Price" path="price"/>
+										<form:label for="price" path="price">Price&nbsp;: </form:label>
+										<form:input type="text" class="form-control"
+											Style="background-color: #cce6ff;" name="price"
+											placeholder="Enter Price" path="price" />
 									</div>
 									<br />
 									<br />
@@ -99,6 +103,12 @@
 					</div>
 				</div>
 				<hr />
+				<div align="center">
+					<span  style="color: green;"><h4>${success}</h4></span> <span
+						style="color: red;"><h4>${IncorrectId}</h4></span> <span
+						style="color: red;"><h4>${fail}</h4></span><br />
+
+				</div>
 				<div class="container">
 					<div style="text-align: center;">
 						<h3 style="color: #1E90FF; font-size: 25px">Your Products</h3>
@@ -107,7 +117,7 @@
 					<table class="table table-striped" align="center">
 						<thead>
 							<tr>
-								<th>Product Id</th>	
+								<th>Product Id</th>
 								<th>Product Name</th>
 								<th>Product Type</th>
 								<th>Quantity</th>
@@ -115,24 +125,27 @@
 							</tr>
 						</thead>
 						<tbody>
-						<c:forEach items="ProductList" var = "product">
-							<tr>
-								<td>${product.productId}</td>
-								<td>${product.productName}</td>
-								<td>${product.productCategory}</td>
-								<td>${product.quantity}</td>
-								<td>${product.price}</td>
-							</tr>
+							<c:forEach items="${ProductList}" var="product">
+								<tr>
+
+									<td>${product.productId}</td>
+									<td>${product.productName}</td>
+									<td>${product.productCategory}</td>
+									<td>${product.quantity}</td>
+									<td>${product.price}</td>
+
+								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
 				</div>
 			</td>
 		</tr>
-		<tr align="center">
+		<%-- 	<tr align="center">
 			<td><span style="color: green;"><h4>${success}</h4></span> <span
 				style="color: red;"><h4>${fail}</h4></span><br /></td>
-		</tr>
+		</tr> --%>
 	</table>
 </body>
 </html>
+<%@ include file="Common-Footer.jsp"%>

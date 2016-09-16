@@ -148,4 +148,5 @@
 	</table>
 </body>
 </html>
+<hr style="border-color: white">
 <%@ include file="Common-Footer.jsp"%>

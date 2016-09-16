@@ -18,6 +18,7 @@
 <style>
 body {
 	color: black
+	padding-bottom: 2cm;
 }
 </style>
 </head>
@@ -83,4 +84,5 @@ body {
 	</table>
 </body>
 </html>
+<hr style="border-color: white">
 <%@ include file="Common-Footer.jsp" %>

@@ -64,7 +64,7 @@ body {
 								<button type="submit" onclick="location.href='Products'"
 									class="btn btn-default"
 									style="background-color: seagreen; color: white; height: 60px;">
-									<h4>&nbsp; View Products (Edit + Update + Delete) &nbsp;</h4>
+									<h4>&nbsp; View Products (Update and Delete) &nbsp;</h4>
 								</button>
 							</div>
 						</div>
@@ -83,3 +83,4 @@ body {
 	</table>
 </body>
 </html>
+<%@ include file="Common-Footer.jsp" %>

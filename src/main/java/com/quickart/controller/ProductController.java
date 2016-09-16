@@ -78,7 +78,6 @@ public class ProductController {
 		List<Product> productlist = productService.getAllProduct();
 		if (result.hasErrors()) {
 			/*String message = "Error Occured: Please Enter Correct Details. Thank You. ";
-
 			modelAndView.addObject("fail", message);*/
 			return modelAndView;
 		} else {
@@ -100,12 +99,14 @@ public class ProductController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public ModelAndView updation(@PathVariable int productId ,@ModelAttribute("product") Product product) {
+	@RequestMapping(value = "/edit/{productId}", method = RequestMethod.POST)
+	public ModelAndView updation(@PathVariable("productId") int  productId, @ModelAttribute("product") Product product) { //
+		product.setProductId(productId);
 		productService.editProduct(product);
 		ModelAndView modelAndView = new ModelAndView("Products");
 		List<Product> productList = productService.getAllProduct();
 		modelAndView.addObject("ProductList", productList);
+		modelAndView.addObject("productId", productId);
 		return modelAndView;
 	}
 
