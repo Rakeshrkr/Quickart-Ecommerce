@@ -10,8 +10,8 @@
     <div class="footer" id="footer">
         <div class="container">
             <div class="row">
-                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-                    <h3> Founder</h3>
+                <div class="col-sm-4  text-center">
+                    <h3><u> Founder</u></h3>
                     <ul>
                         <li>  Rakesh Kumar </li>
                         <li> Powai, Hiranandani  </li>
@@ -19,8 +19,8 @@
                         <li> 400076   </li>
                     </ul>
                 </div>
-                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-                    <h3> Co-founder </h3>
+                <div class="col-sm-4 text-center">
+                    <h3> <u>Co-founder </u></h3>
                     <ul>
                         <li>  Rinku Kumar  </li>
                         <li>  Ladwa, Dhod  </li>
@@ -29,8 +29,8 @@
                     </ul>
                 </div>
              
-                <div class="col-lg-4  col-md-2 col-sm-4 col-xs-6 " id="secondfooter">
-                    <h3> Subscribe Us ! </h3>
+                <div class="col-lg-4 " >
+                    <h3 class="text-center"> <u>Subscribe Us! </u></h3>
                     <ul>
                         <li>
                             <div class="input-append newsletter-box text-center">
@@ -39,7 +39,7 @@
                             </div>
                         </li>
                     </ul>
-                    <ul class="social" >
+                    <ul class="social " >
                         <li> <a href="http://facebook.com"> <i class=" fa fa-facebook">   </i> </a> </li>
                         <li> <a href="http://twitter.com"> <i class="fa fa-twitter">   </i> </a> </li>
                         <li> <a href="http://googleplus.com"> <i class="fa fa-google-plus">   </i> </a> </li>

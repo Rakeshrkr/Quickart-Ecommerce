@@ -33,8 +33,8 @@
 							</div>
 						</div>
 						<div class="col-sm-4" align="right">
-							<button type="submit" onclick="location.href='goback'"
-								class="btn btn-default">Go Home</button>
+							<!-- <button type="submit" onclick="location.href='goback'"
+								class="btn btn-default">Go Home</button> -->
 							&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
 							<button type="submit" onclick="location.href='index'"
 								class="btn btn-default">Log Out</button>
@@ -45,7 +45,7 @@
 		</tr>
 		<tr>
 			<td>
-				<div class="container text-center">
+				<%-- <div class="container text-center">
 					<div class="row">
 						<h3 style="color: #1E90FF">Add Products</h3>
 						<br />
@@ -101,10 +101,10 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> --%>
 				<hr />
 				<div align="center">
-					<span  style="color: green;"><h4>${success}</h4></span> <span
+					<span style="color: green;"><h4>${success}</h4></span> <span
 						style="color: red;"><h4>${IncorrectId}</h4></span> <span
 						style="color: red;"><h4>${fail}</h4></span><br />
 

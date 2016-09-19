@@ -34,8 +34,8 @@
 							</div> --%>
 						</div>
 						<div class="col-sm-4" align="right">
-							<button type="submit" onclick="location.href='goback'"
-								class="btn btn-default">Go Home</button>
+							<!-- <button type="submit" onclick="location.href='goback'"
+								class="btn btn-default">Go Home</button> -->
 							&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
 							<button type="submit" onclick="location.href='index'"
 								class="btn btn-default">Log Out</button>
@@ -46,6 +46,63 @@
 		</tr>
 		<tr>
 			<td><hr />
+				<div class="container text-center">
+					<div class="row">
+						<h3 style="color: #1E90FF">Add Products</h3>
+						<br />
+						<div class="col-sm-12">
+							<div>
+								<form:form class="form-inline" method="post" action="addProduct"
+									commandName="Product">
+									<div class="form-group">
+										<form:label for="productName" path="productName">Product Name&nbsp;:</form:label>
+										<form:input type="text" class="form-control"
+											Style="background-color: #cce6ff;" name="productName"
+											path="productName" placeholder="Enter Product" />
+									</div>
+									
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<div class="form-group">
+										<form:label for="productCategory" path="productCategory">Product Category: </form:label>
+										<form:select class="form-control"
+											Style="background-color: #cce6ff;" name="productCategory"
+											path="productCategory">
+											<form:option value="Electronics">Electronics</form:option>
+											<form:option value="Men's Wearing">Men's Wearing</form:option>
+											<form:option value="Girl's Wearing">Girl's Wearing</form:option>
+											<form:option value="Furniture">Furniture</form:option>
+											<form:option value="Other">Other</form:option>
+										</form:select>
+									</div>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<div class="form-group"></div>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<div class="form-group">
+										<form:label for="quantity" path="quantity">Quantity&nbsp;:</form:label>
+										<form:select class="form-control" path="quantity"
+											Style="background-color: #cce6ff;" name="quantity">
+											<form:option value="1">1</form:option>
+											<form:option value="2">2</form:option>
+											<form:option value="3">3</form:option>
+											<form:option value="4">4</form:option>
+										</form:select>
+									</div> 
+									
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<div class="form-group">
+										<form:label for="price" path="price">Price&nbsp;: </form:label>
+										<form:input type="text" class="form-control"
+											Style="background-color: #cce6ff;" name="price"
+											placeholder="Enter Price" path="price" />
+									</div>
+									<br />
+									<br />
+									<form:button type="submit" class="btn btn-primary">Submit</form:button>
+								</form:form>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="container">
 					<div style="text-align: center;">
 						<h3 style="color: #1E90FF">Your Products
@@ -86,8 +143,8 @@
 		</tr>
 	</table>
 	<c:forEach items="${ProductList}" var="product">
-		<div class="modal fade" id="${product.productId}" tabindex="-1" role="dialog"
-			aria-labelledby="exampleModalLabel">
+		<div class="modal fade" id="${product.productId}" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-body">

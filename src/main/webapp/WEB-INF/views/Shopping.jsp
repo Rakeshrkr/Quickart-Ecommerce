@@ -10,7 +10,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<h4>Laptops</h4>
-					<img src="<c:url value="resources/images/Laptop.jpeg"></c:url>"  class="img-responsive" alt="image">
+					<img src="<c:url value="images/Laptop.jpeg"></c:url>"  class="img-responsive" alt="image">
 				</div>
 
 			</div>
@@ -19,7 +19,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<h4>Cameras</h4>
-					<img src="<c:url value="resources/images/Camera.jpeg"></c:url>"  class="img-responsive" alt="image">
+					<img src="<c:url value="images/Camera.jpeg"></c:url>"  class="img-responsive" alt="image">
 				</div>
 
 			</div>
@@ -28,7 +28,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<h4>Printers</h4>
-					<img src="<c:url value="resources/images/Printer.jpeg"></c:url>"  class="img-responsive" alt="image">
+					<img src="<c:url value="images/Printer.jpeg"></c:url>"  class="img-responsive" alt="image">
 				</div>
 
 			</div>
@@ -37,7 +37,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<h4>Mobiles</h4>
-					<img src="<c:url value="resources/images/Mobile.jpeg"></c:url>"  class="img-responsive" alt="image">
+					<img src="<c:url value="images/Mobile.jpeg"></c:url>"  class="img-responsive" alt="image">
 				</div>
 
 			</div>
@@ -46,7 +46,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<h4>Lens</h4>
-					<img src="<c:url value="resources/images/Lens.jpeg"></c:url>"  class="img-responsive" alt="image">
+					<img src="<c:url value="images/Lens.jpeg"></c:url>"  class="img-responsive" alt="image">
 				</div>
 
 			</div>
@@ -55,7 +55,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<h4>Memory Cards</h4>
-					<img src="<c:url value="resources/images/MemoryCard.jpeg"></c:url>"  class="img-responsive" alt="image">
+					<img src="<c:url value="images/MemoryCard.jpeg"></c:url>"  class="img-responsive" alt="image">
 				</div>
 
 			</div>

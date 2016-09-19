@@ -31,24 +31,22 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 
-	@RequestMapping("/Productsx")
-	public ModelAndView getProducts(Map<String, Object> map) {
-		Product product = new Product();
-		map.put("product", product);
-		map.put("productList", productService.getAllProduct());
-		ModelAndView modelandview = new ModelAndView("Products");
-		return modelandview;
-	}
-
 	@RequestMapping(value = "/Login", method = RequestMethod.POST)
-	public String GoToHome(@RequestParam String name, @RequestParam String password, ModelMap model) {
+	public ModelAndView GoToHome(@RequestParam String name, @RequestParam String password, ModelMap model) {
 		if (name.equalsIgnoreCase("Rakesh") && password.equals("rakesh123")) {
 			model.addAttribute("SessionAdminName", name);
 			model.put("AdminName", name);
 			model.put("password", password);
-			return "AdminHomePage";
+			List<Product> productList = productService.getAllProduct();
+			Product product = new Product();
+			ModelAndView mav = new ModelAndView("Products");
+			mav.addObject("Product", product);
+			mav.addObject("ProductList", productList);
+			return mav;
+			
 		}
-		return "Unsuccess";
+		ModelAndView mav = new ModelAndView("Unsuccess");
+		return mav ;
 	}
 
 	@RequestMapping(value = "/adminPage")
@@ -65,7 +63,7 @@ public class ProductController {
 	public ModelAndView goToAddProduct() {
 		List<Product> productList = productService.getAllProduct();
 		Product product = new Product();
-		ModelAndView mav = new ModelAndView("AddProduct");
+		ModelAndView mav = new ModelAndView("Products");
 		mav.addObject("Product", product);
 		mav.addObject("ProductList", productList);
 		return mav;
@@ -103,10 +101,7 @@ public class ProductController {
 	public ModelAndView updation(@PathVariable("productId") int  productId, @ModelAttribute("product") Product product) { //
 		product.setProductId(productId);
 		productService.editProduct(product);
-		ModelAndView modelAndView = new ModelAndView("Products");
-		List<Product> productList = productService.getAllProduct();
-		modelAndView.addObject("ProductList", productList);
-		modelAndView.addObject("productId", productId);
+		ModelAndView modelAndView = new ModelAndView("redirect:/addProduct");
 		return modelAndView;
 	}
 
@@ -118,13 +113,15 @@ public class ProductController {
 
 	@RequestMapping(value = "/{productId}", method = RequestMethod.GET)
 	public ModelAndView deleteproduct(@PathVariable int productId) {
-
 		productService.deleteProduct(productId);
-		ModelAndView modelAndView = new ModelAndView("Products");
+		ModelAndView modelAndView = new ModelAndView("redirect:/addProduct");
 		List<Product> productList = productService.getAllProduct();
 		modelAndView.addObject("ProductList", productList);
 		return modelAndView;
 	}
+	
+	
+	
 	 /*@RequestMapping(value="/editProduct/{productId}")  
 	    public ModelAndView edit(@PathVariable int productId){  
 	        Product product= productService.getProduct(productId); //dao.getEmpById(id);  

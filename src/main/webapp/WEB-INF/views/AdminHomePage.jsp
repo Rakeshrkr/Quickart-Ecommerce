@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Indra's_webapp]</title>
+<title></title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -39,16 +39,16 @@ body {
 							</div>
 						</div>
 						<div class="col-sm-4" align="right">
-							<button type="submit" onclick="location.href='goback'"
+							<!-- <button type="submit" onclick="location.href='goback'"
 								class="btn btn-default">Go Home</button>
-							&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; -->
 							<button type="submit" onclick="location.href='index'"
 								class="btn btn-default">Log Out</button>
 						</div>
 					</div>
 				</div> <br />
 				<div class="container text-center">
-					<div class="row">
+					<%-- <div class="row">
 						<div class="col-sm-12 well">
 							<div class="well">
 								<a href="<c:url value ="addProduct" />"
@@ -58,14 +58,14 @@ body {
 								</a>
 							</div>
 						</div>
-					</div>
+					</div> --%>
 					<div class="row">
 						<div class="col-sm-12 well">
 							<div class="well">
 								<button type="submit" onclick="location.href='Products'"
 									class="btn btn-default"
 									style="background-color: seagreen; color: white; height: 60px;">
-									<h4>&nbsp; View Products (Update and Delete) &nbsp;</h4>
+									<h4>&nbsp; Add, Update and Delete Products &nbsp;</h4>
 								</button>
 							</div>
 						</div>
