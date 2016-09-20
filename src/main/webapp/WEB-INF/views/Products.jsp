@@ -2,30 +2,6 @@
 
 	<table width="50%" align="center"
 		style="margin-top: 3%; box-shadow: 0px 9px 30px #888888;">
-	<%-- 	<tr>
-			<td>
-				<div class="container-fluid">
-					<div class="row"
-						style="background-color: #003366; text-align: center; padding: 10px;">
-						<div class="col-sm-4"></div>
-						<div class="col-sm-4">
-							<div>
-								<span
-									style="text-shadow: 0px 2px 6px #800000; font-size: 17px; color: gold; font-family: initial;">
-									Welcome : &nbsp;${user}</span>
-							</div>
-						</div>
-						<!-- <div class="col-sm-4" align="right">
-							<button type="submit" onclick="location.href='goback'"
-								class="btn btn-default">Go Home</button>
-							&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-							<button type="submit" onclick="location.href='index'"
-								class="btn btn-default">Log Out</button>
-						</div> -->
-					</div>
-				</div>
-			</td>
-		</tr> --%>
 		<tr>
 			<td><hr />
 				<div class="container text-center">
@@ -45,7 +21,7 @@
 									
 									&nbsp;&nbsp;&nbsp;&nbsp;
 									<div class="form-group">
-										<form:label for="productCategory" path="productCategory">Product Category: </form:label>
+										<form:label for="productCategory" path="productCategory"> Category: </form:label>
 										<form:select class="form-control"
 											Style="background-color: #cce6ff;" name="productCategory"
 											path="productCategory">
@@ -59,7 +35,7 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;
 									<div class="form-group"></div>
 									&nbsp;&nbsp;&nbsp;&nbsp;
-									<div class="form-group">
+									<%-- <div class="form-group">
 										<form:label for="quantity" path="quantity">Quantity&nbsp;:</form:label>
 										<form:select class="form-control" path="quantity"
 											Style="background-color: #cce6ff;" name="quantity">
@@ -68,7 +44,13 @@
 											<form:option value="3">3</form:option>
 											<form:option value="4">4</form:option>
 										</form:select>
-									</div> 
+									</div>  --%>
+									<div class="form-group">
+										<form:label for="quantity" path="quantity">Quantity&nbsp;:</form:label>
+										<form:input type="text" class="form-control"
+											Style="background-color: #cce6ff;" name="quantity"
+											path="quantity" placeholder="00" />
+									</div>
 									
 									&nbsp;&nbsp;&nbsp;&nbsp;
 									<div class="form-group">
@@ -148,27 +130,22 @@
 									</div>
 
 									<div class="form-group">
-										<label for="name" class="control-label">Product
-											Category</label> <select class="form-control" name="productCategory"
-											value="${product.productCategory}">
-											<option>Electronics</option>
-											<option>Men's Wearing</option>
-											<option>Girl's Wearing</option>
-											<option>Furniture</option>
-											<option>Other</option>
+										<label for="name" class="control-label" >Product
+											Category</label> <select class="form-control" name="productCategory">
+											<option value="${product.productCategory}">Electronics</option>
+											<option value="${product.productCategory}">Men's Wearing</option>
+											<option value="${product.productCategory}"> Girl's Wearing</option>
+											<option value="${product.productCategory}">Furniture</option>
+											<option value="${product.productCategory}">Other</option>
 										</select>
 
 									</div>
 
 									<div class="form-group">
-										<label for="name" class="control-label">Quantity</label> <select
-											class="form-control" name="quantity"
+										<label for="name" class="control-label">Quantity</label> <input
+											type="text" class="form-control" name="quantity"
 											value="${product.quantity}">
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-										</select>
+										
 									</div>
 
 									<div class="form-group">

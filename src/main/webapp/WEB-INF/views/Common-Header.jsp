@@ -12,9 +12,12 @@
 <meta charset='utf-8' />
 <title>Quickart</title>
 <meta name="viewport" content="width-divice-width,initial-scale-1.0">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script
+	src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
 <link href="<c:url value="/css/MyStyleSheet.css" />" rel="stylesheet">
 <!-- Latest compiled and minified CSS -->
@@ -65,7 +68,6 @@
 				<li><a href="ContactUs"><span
 						class="glyphicon glyphicon-earphone"></span> Contact Us</a></li>
 
-
 				<c:choose>
 					<c:when test="${user==null}">
 						<li><a href="Register"><span
@@ -74,7 +76,6 @@
 						<li><a href="Login"><span
 								class="glyphicon glyphicon-log-in" id="loginbutton"></span>
 								Login</a></li>
-
 					</c:when>
 					<c:otherwise>
 						<%-- <li><a href="index"><span
@@ -87,22 +88,13 @@
 								${user}<b class="caret"></b>
 						</a>
 							<ul class="dropdown-menu">
-								<li><a href="index">LogOut</a></li>
+								<li><a href="logout">LogOut</a></li>
 							</ul></li>
-
-
-
-
 					</c:otherwise>
 				</c:choose>
-
-
-
 			</ul>
-
-
 			<ul style="font-size: 0.9vw" class="nav navbar-nav">
-				<li><a href="/quickart">Home</a>
+				<li><a href="/quickart">Home</a> 
 				<li><a href="/quickart">Gallary</a>
 				<li><a href="/quickart">Shopping</a>
 				<li><a href="/quickart">About Us</a>
@@ -131,7 +123,7 @@
 					<div class="btn-group">
 						<a href="" class="btn btn-primary">Download App</a> <a
 							href="#shopping" class="btn btn-info">Visit Store</a> <a href=""
-							class="btn btn-primary">Spread the word</a>
+							class="btn btn-primary"> Spread the word</a>
 					</div>
 				</div>
 			</div>

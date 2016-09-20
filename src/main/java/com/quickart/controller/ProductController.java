@@ -1,16 +1,12 @@
 package com.quickart.controller;
-
-import com.quickart.model.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import javax.transaction.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,28 +15,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.quickart.dao.ProductDao;
-import com.quickart.dao.impl.ProductDaoImpl;
 import com.quickart.model.Product;
 import com.quickart.service.ProductService;
 
+
 @Controller
 public class ProductController {
-
 	@Autowired
 	private ProductService productService;
 
 	@RequestMapping(value = "/Login", method = RequestMethod.POST)
-	public ModelAndView GoToHome(@RequestParam String name, @RequestParam String password, ModelMap model) {
+	public ModelAndView GoToHome(@RequestParam String name, @RequestParam String password, ModelMap model,HttpServletRequest request,HttpServletResponse response)throws Exception {
 		if (name.equalsIgnoreCase("Rakesh") && password.equals("rakesh123")) {
-			model.addAttribute("user", name);
-			model.put("AdminName", name);
-			model.put("password", password);
+			HttpSession session = request.getSession();
+			session.setAttribute("user", name);
 			List<Product> productList = productService.getAllProduct();
 			Product product = new Product();
 			ModelAndView mav = new ModelAndView("Products");
-			mav.addObject("user", name);
 			mav.addObject("Product", product);
 			mav.addObject("ProductList", productList);
 			return mav;
@@ -50,15 +41,15 @@ public class ProductController {
 		return mav ;
 	}
 
-	@RequestMapping(value = "/adminPage")
-	public String goToAdminHomePage() {
-		return "AdminHomePage";
+	
+	@RequestMapping(value = "/logout")
+	public String goToindex(HttpServletRequest request,HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		session.setAttribute("user", null);
+		session.invalidate();
+		return "index";
 	}
 
-	@RequestMapping(value = "/goback")
-	public String GoToHomePage() {
-		return "AdminHomePage";
-	}
 
 	@RequestMapping(value = "/addProduct")
 	public ModelAndView goToAddProduct() {
@@ -76,14 +67,10 @@ public class ProductController {
 
 		List<Product> productlist = productService.getAllProduct();
 		if (result.hasErrors()) {
-			/*String message = "Error Occured: Please Enter Correct Details. Thank You. ";
-			modelAndView.addObject("fail", message);*/
 			return modelAndView;
 		} else {
 			productService.addProduct(product);
-			/*String message = "Added to Your Products. Thank You";*/
 			modelAndView.addObject("ProductList", productlist);
-			/*modelAndView.addObject("success", message);*/
 			return modelAndView;
 		}
 	}
