@@ -34,12 +34,13 @@ public class ProductController {
 	@RequestMapping(value = "/Login", method = RequestMethod.POST)
 	public ModelAndView GoToHome(@RequestParam String name, @RequestParam String password, ModelMap model) {
 		if (name.equalsIgnoreCase("Rakesh") && password.equals("rakesh123")) {
-			model.addAttribute("SessionAdminName", name);
+			model.addAttribute("user", name);
 			model.put("AdminName", name);
 			model.put("password", password);
 			List<Product> productList = productService.getAllProduct();
 			Product product = new Product();
 			ModelAndView mav = new ModelAndView("Products");
+			mav.addObject("user", name);
 			mav.addObject("Product", product);
 			mav.addObject("ProductList", productList);
 			return mav;
