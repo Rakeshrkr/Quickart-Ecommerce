@@ -1,5 +1,6 @@
 <%@ include file="Common-Header.jsp"%>
-
+<div style="text-align: center "  ><font color="red">${errorMessage}</font> </div>
+<br>
 <!--Login form start from here-->
 <div class="container" >
 	<div class="row" align="center">

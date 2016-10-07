@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,6 +12,15 @@
 <meta charset='utf-8' />
 <title>Quickart</title>
 <meta name="viewport" content="width-divice-width,initial-scale-1.0">
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<script
+	src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
 <link href="<c:url value="/css/MyStyleSheet.css" />" rel="stylesheet">
 <!-- Latest compiled and minified CSS -->
@@ -26,6 +37,13 @@
 <link
 	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
 	rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 </head>
 <body data-spy="scroll" data-target="#my-navbar">
@@ -36,37 +54,56 @@
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target="#navbar-collapse">
 				<!--navbar toggle button start-->
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span> 
-				<span class="icon-bar"></span> 
-				<span class="icon-bar"></span>
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
 			</button>
 			<!--navbar toggle button ends-->
 			<b><a href="index" class="navbar-brand">Quickart</a></b>
 		</div>
 		<!--navbar header ends-->
-		<div class="collapse navbar-collapse" id="navbar-collapse">
+		<div class="collapse nav nav-collapse navbar-collapse"
+			id="navbar-collapse">
 			<!--navbar collapse items-->
 			<ul class="nav navbar-nav navbar-right">
-			    <li><a style="color:white" href="" id="cart"> <span 
-			            class="glyphicon glyphicon-shopping-cart"></span>Cart<span class="badge">0</span></a></li>
 
 				<li><a href="ContactUs"><span
 						class="glyphicon glyphicon-earphone"></span> Contact Us</a></li>
-				<li><a href="Register"><span
-						class="glyphicon glyphicon-user" id="signupbutton"></span> Sign Up</a></li>
-				<li><a href="Login"><span
-						class="glyphicon glyphicon-log-in" id="loginbutton"></span> Login</a></li>
-			</ul>
 
-			<ul style="font-size:0.9vw" class="nav navbar-nav">
+				<c:choose>
+					<c:when test="${user==null}">
+						<li><a href="addUser"><span
+								class="glyphicon glyphicon-user" id="signupbutton"></span> Sign
+								Up</a></li>
+						<li><a href="Login"><span
+								class="glyphicon glyphicon-log-in" id="loginbutton"></span>
+								Login</a></li>
+					</c:when>
+					<c:otherwise>
+
+						<li><a style="color: white" href="" id="cart"> <span
+								class="glyphicon glyphicon-shopping-cart"></span>Cart<span
+								class="badge">0</span></a></li>
+
+						<li class="dropdown dropdown clearfix"><a href="#"
+							class="dropdown-toggle" data-toggle="dropdown"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								${user}<b class="caret"></b>
+						</a>
+							<ul class="dropdown-menu">
+								<li><a href="logout">LogOut</a></li>
+							</ul></li>
+
+					</c:otherwise>
+				</c:choose>
+			</ul>
+			<ul style="font-size: 0.9vw" class="nav navbar-nav">
 				<li><a href="/quickart">Home</a>
 				<li><a href="/quickart">Gallary</a>
 				<li><a href="/quickart">Shopping</a>
 				<li><a href="/quickart">About Us</a>
 			</ul>
 
-			
+
 		</div>
 		<!--navbar collapse items ends-->
 	</div>
@@ -78,18 +115,63 @@
 		<!--Jumbotron starts from here-->
 		<div class="container text-center" id="home-container">
 			<div class="row">
-				<div class="col-md-4"> 
-					<img src="<c:url value="/images/Quickart.jpg"></c:url>" alt="Quickartlogo" />
+				<div class="col-md-4">
+					<img src="<c:url value="/images/Quickart.jpg"></c:url>"
+						alt="Quickartlogo" />
 				</div>
 				<div class="col-md-8">
 					<h1>Quickart</h1>
 					<p>Find and buy everything you need - Cloths, electronics and
 						many more</p>
-					<div class="btn-group">
-						<a href="" class="btn btn-primary">Download App</a> <a
-							href="#shopping" class="btn btn-info">Visit Store</a> <a href=""
-							class="btn btn-primary">Spread the word</a>
-					</div>
+					<c:choose>
+						<c:when test="${RoleId == 'ROLE_ADMIN'}">
+							<c:choose>
+								<c:when test="${isProductClicked == true}">
+									<div class="btn-group" id="selector">
+										<button id="b1" onclick="location.href='addCategory'"
+											class="btn btn-primary ">Categories</button>
+										<button id="b2" onclick="location.href='addProduct'"
+											class="btn btn-primary active">Products</button>
+										<button id="b3" onclick="location.href='addSupplier'"
+											class="btn btn-primary ">Suppliers</button>
+									</div>
+								</c:when>
+
+								<c:when test="${isSupplierClicked == true}">
+									<div class="btn-group" id="selector">
+										<button id="b1" onclick="location.href='addCategory'"
+											class="btn btn-primary ">Categories</button>
+										<button id="b2" onclick="location.href='addProduct'"
+											class="btn btn-primary ">Products</button>
+										<button id="b3" onclick="location.href='addSupplier'"
+											class="btn btn-primary active">Suppliers</button>
+									</div>
+								</c:when>
+
+								<c:when test="${isCategoryClicked == true}">
+									<div class="btn-group" id="selector">
+										<button id="b1" onclick="location.href='addCategory'"
+											class="btn btn-primary active">Categories</button>
+										<button id="b2" onclick="location.href='addProduct'"
+											class="btn btn-primary ">Products</button>
+										<button id="b3" onclick="location.href='addSupplier'"
+											class="btn btn-primary ">Suppliers</button>
+									</div>
+								</c:when>
+
+							</c:choose>
+
+
+						</c:when>
+						<c:otherwise>
+								<div class="btn-group">
+										<a id="bb1" href="" class="btn btn-primary">Download App</a> <a
+											id="bb2" href="#shopping" class="btn btn-info">Visit
+											Store</a> <a id="bb3" href="" class="btn btn-primary"> Spread
+											the word</a>
+									</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 		</div>

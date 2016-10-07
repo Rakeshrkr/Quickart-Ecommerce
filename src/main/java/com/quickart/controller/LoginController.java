@@ -16,6 +16,7 @@ public class LoginController {
 		return "index" ;
 	}	
 	
+	
 	@RequestMapping(value = "/Login" ,method = RequestMethod.GET)
 	public String showLogin(){
 		return "Login" ;

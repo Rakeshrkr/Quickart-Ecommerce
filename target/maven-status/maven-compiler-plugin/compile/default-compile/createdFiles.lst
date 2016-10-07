@@ -1,13 +1,4 @@
-com\quickart\dao\impl\UserDaoImpl.class
-com\quickart\dao\ProductDao.class
-com\quickart\dao\UserDao.class
-com\quickart\model\Product.class
-com\quickart\dao\impl\ProductDaoImpl.class
-com\quickart\model\User.class
-com\quickart\service\impl\ProductServiceImpl.class
-com\quickart\service\ProductService.class
 com\quickart\controller\LoginController.class
-com\quickart\controller\RegisterController.class
-com\quickart\service\impl\UserServiceImpl.class
+com\quickart\util\FileUtilClass.class
 com\quickart\controller\ProductController.class
-com\quickart\service\UserService.class
+com\quickart\controller\RegisterController.class

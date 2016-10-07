@@ -1,74 +1,63 @@
 package com.quickart.controller;
-
 import java.util.List;
-import java.util.Map;
-import javax.validation.Valid;
 
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.quickart.dao.*;
-import com.quickart.model.*;
-import com.quickart.service.ProductService;
-import com.quickart.service.UserService;
+import com.ecommerce.quickart.dao.UserDetailsDao;
+import com.ecommerce.quickart.model.Category;
+import com.ecommerce.quickart.model.User;
+import com.ecommerce.quickart.model.UserDetails;
+
+
 
 
 @Controller
 public class RegisterController {
+	
 	@Autowired
-	private UserService userService;
+	UserDetails userDetails ;
+	
+	@Autowired
+	UserDetailsDao userDetailsDao ;
 
-	@RequestMapping(value = "/Register", method = RequestMethod.GET)
-	public ModelAndView getRegistrationForm() {
-		ModelAndView modelandview = new ModelAndView("Register");
-		return modelandview;
+	@ModelAttribute("userDetails")
+	public UserDetails newUserDetails(){
+		return new UserDetails() ;
 	}
+	
+    /*---------------------------------------------------*/
+	
 
-	@RequestMapping(value = "/RegistrationSuccess", method = RequestMethod.POST)
-	public ModelAndView submitRegistrationForm(@Valid @ModelAttribute() User user, BindingResult result) {
-
-		if (result.hasErrors()) {
-			ModelAndView modelandview = new ModelAndView("Register");
-			return modelandview;
-			
-		} else {
-			ModelAndView modelandview = new ModelAndView("RegistrationSuccess");
-			return modelandview;
-		}
-	}
-	@InitBinder
-	public void initBinder(WebDataBinder binder){
-		binder.setDisallowedFields(new String[] {"password"});
-		
-	}
 	@RequestMapping(value = "/addUser")
-	public ModelAndView goToAddUser() {
-		
-		User user = new User();
-		ModelAndView mav = new ModelAndView("Login");
-		mav.addObject("User", user);
-		return mav;
+	public String goToRegisterPage(Model model) {
+		model.addAttribute("userDetails", new UserDetails());
+		return "Register";
 	}
-
 
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
-	public ModelAndView ForAddingProducts(@ModelAttribute("User") User user, BindingResult result) {
-
+	public ModelAndView ForAddingUser(@ModelAttribute("userDetails") UserDetails userDetails, BindingResult result) {
 		ModelAndView modelAndView = new ModelAndView("Login");
+
 		if (result.hasErrors()) {
-			
+			userDetailsDao.saveUserDetails(userDetails);
 			return modelAndView;
 		} else {
-			userService.addUser(user);
+			userDetailsDao.saveUserDetails(userDetails);
 			return modelAndView;
 		}
 	}
+
+	
+    
 }

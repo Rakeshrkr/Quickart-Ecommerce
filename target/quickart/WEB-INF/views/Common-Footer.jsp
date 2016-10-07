@@ -1,9 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
 <!--footer tag-->
 <footer id ="aboutus">
@@ -22,10 +16,10 @@
                 <div class="col-sm-4 text-center">
                     <h3> <u>Co-founder </u></h3>
                     <ul>
-                        <li>  Rinku Kumar  </li>
-                        <li>  Ladwa, Dhod  </li>
-                        <li>  Sikar (Raj) </li>
-                        <li>  332002 </li>
+                        <li>  R Bala </li>
+                        <li>  Powai, IITB  </li>
+                        <li>  Mumbai (Maharastra) </li>
+                        <li>  400076 </li>
                     </ul>
                 </div>
              
@@ -69,7 +63,7 @@
     <!--/.footer-bottom--> 
 </footer>
    			
-
+	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 	
