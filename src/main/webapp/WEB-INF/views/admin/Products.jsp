@@ -176,6 +176,18 @@
 										type="text" class="form-control" name="price"
 										value="${product.price}" placeholder="Enter New Price">
 								</div>
+								
+								<div class="form-group">
+									<label for="supplier" class="control-label">Supplier</label> <input
+										type="text" class="form-control" name="supplier"
+										value="${product.supplier}" placeholder="Enter Supplier">
+								</div>
+								
+								<div class="form-group">
+									<label for="category" class="control-label">Category</label> <input
+										type="text" class="form-control" name="category"
+										value="${product.category}" placeholder="Enter Category">
+								</div>
 							</div>
 
 						</div>

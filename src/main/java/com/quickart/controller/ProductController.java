@@ -136,7 +136,6 @@ public class ProductController {
 		List<Product> productlist = productDao.getAllProduct();
 		if (result.hasErrors()) {
 			ModelAndView modelAndView = new ModelAndView("redirect:/admin/addProduct");
-			
 			product.setSupplier(supplierDao.getSupplierByName(supplier1));
 			product.setCategory(categoryDao.getCategoryByName(category1));
 			productDao.addProduct(product);
@@ -145,7 +144,7 @@ public class ProductController {
 			
 			return modelAndView;
 		} else {
-
+			
 			ModelAndView modelAndView = new ModelAndView("redirect:/admin/addProduct");
 			modelAndView.addObject("ProductList", productlist);
 			productDao.addProduct(product);
@@ -156,8 +155,8 @@ public class ProductController {
 
 	@RequestMapping(value = "/admin/edit/{productId}", method = RequestMethod.POST)
 	public ModelAndView updation(@PathVariable("productId") int productId, @ModelAttribute("product") Product product) { //
-		product.setProductId(productId);
-		productDao.editProduct(product);
+		Product product1 = new Product();
+		productDao.editProduct(product1);
 		ModelAndView modelAndView = new ModelAndView("redirect:/admin/addProduct");
 		return modelAndView;
 	}
