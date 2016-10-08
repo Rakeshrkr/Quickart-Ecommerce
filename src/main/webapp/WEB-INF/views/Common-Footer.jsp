@@ -16,10 +16,10 @@
                 <div class="col-sm-4 text-center">
                     <h3> <u>Co-founder </u></h3>
                     <ul>
-                        <li>  Rinku Kumar  </li>
-                        <li>  Ladwa, Dhod  </li>
-                        <li>  Sikar (Raj) </li>
-                        <li>  332002 </li>
+                        <li>  R Bala </li>
+                        <li>  Powai, IITB  </li>
+                        <li>  Mumbai (Maharastra) </li>
+                        <li>  400076 </li>
                     </ul>
                 </div>
              
@@ -63,7 +63,7 @@
     <!--/.footer-bottom--> 
 </footer>
    			
-
+	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 	

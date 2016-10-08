@@ -15,6 +15,9 @@
 <script
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<script
 	src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
@@ -62,15 +65,13 @@
 			id="navbar-collapse">
 			<!--navbar collapse items-->
 			<ul class="nav navbar-nav navbar-right">
-				<li><a style="color: white" href="" id="cart"> <span
-						class="glyphicon glyphicon-shopping-cart"></span>Cart<span
-						class="badge">0</span></a></li>
+
 				<li><a href="ContactUs"><span
 						class="glyphicon glyphicon-earphone"></span> Contact Us</a></li>
 
 				<c:choose>
 					<c:when test="${user==null}">
-						<li><a href="Register"><span
+						<li><a href="addUser"><span
 								class="glyphicon glyphicon-user" id="signupbutton"></span> Sign
 								Up</a></li>
 						<li><a href="Login"><span
@@ -78,10 +79,11 @@
 								Login</a></li>
 					</c:when>
 					<c:otherwise>
-						<%-- <li><a href="index"><span
-								class="glyphicon glyphicon-log-out" id="logoutbutton"></span>
-								${user}</a></li> --%>
-						<li>
+
+						<li><a style="color: white" href="" id="cart"> <span
+								class="glyphicon glyphicon-shopping-cart"></span>Cart<span
+								class="badge">0</span></a></li>
+
 						<li class="dropdown dropdown clearfix"><a href="#"
 							class="dropdown-toggle" data-toggle="dropdown"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -90,11 +92,12 @@
 							<ul class="dropdown-menu">
 								<li><a href="logout">LogOut</a></li>
 							</ul></li>
+
 					</c:otherwise>
 				</c:choose>
 			</ul>
 			<ul style="font-size: 0.9vw" class="nav navbar-nav">
-				<li><a href="/quickart">Home</a> 
+				<li><a href="/quickart">Home</a>
 				<li><a href="/quickart">Gallary</a>
 				<li><a href="/quickart">Shopping</a>
 				<li><a href="/quickart">About Us</a>
@@ -120,11 +123,55 @@
 					<h1>Quickart</h1>
 					<p>Find and buy everything you need - Cloths, electronics and
 						many more</p>
-					<div class="btn-group">
-						<a href="" class="btn btn-primary">Download App</a> <a
-							href="#shopping" class="btn btn-info">Visit Store</a> <a href=""
-							class="btn btn-primary"> Spread the word</a>
-					</div>
+					<c:choose>
+						<c:when test="${RoleId == 'ROLE_ADMIN'}">
+							<c:choose>
+								<c:when test="${isProductClicked == true}">
+									<div class="btn-group" id="selector">
+										<button id="b1" onclick="location.href='addCategory'"
+											class="btn btn-primary ">Categories</button>
+										<button id="b2" onclick="location.href='addProduct'"
+											class="btn btn-primary active">Products</button>
+										<button id="b3" onclick="location.href='addSupplier'"
+											class="btn btn-primary ">Suppliers</button>
+									</div>
+								</c:when>
+
+								<c:when test="${isSupplierClicked == true}">
+									<div class="btn-group" id="selector">
+										<button id="b1" onclick="location.href='addCategory'"
+											class="btn btn-primary ">Categories</button>
+										<button id="b2" onclick="location.href='addProduct'"
+											class="btn btn-primary ">Products</button>
+										<button id="b3" onclick="location.href='addSupplier'"
+											class="btn btn-primary active">Suppliers</button>
+									</div>
+								</c:when>
+
+								<c:when test="${isCategoryClicked == true}">
+									<div class="btn-group" id="selector">
+										<button id="b1" onclick="location.href='addCategory'"
+											class="btn btn-primary active">Categories</button>
+										<button id="b2" onclick="location.href='addProduct'"
+											class="btn btn-primary ">Products</button>
+										<button id="b3" onclick="location.href='addSupplier'"
+											class="btn btn-primary ">Suppliers</button>
+									</div>
+								</c:when>
+
+							</c:choose>
+
+
+						</c:when>
+						<c:otherwise>
+								<div class="btn-group">
+										<a id="bb1" href="" class="btn btn-primary">Download App</a> <a
+											id="bb2" href="#shopping" class="btn btn-info">Visit
+											Store</a> <a id="bb3" href="" class="btn btn-primary"> Spread
+											the word</a>
+									</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 		</div>
