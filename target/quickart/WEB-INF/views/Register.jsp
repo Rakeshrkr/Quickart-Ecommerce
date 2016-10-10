@@ -38,7 +38,7 @@
 			<form:label path="password" for="password"
 				class="col-sm-3 control-label">Password</form:label>
 			<div class="col-sm-9">
-				<input type="password" id="password" class="form-control">
+				<form:input type="password" path="password" id="password" class="form-control"/>
 			</div>
 		</div>
 		<div class="form-group">
@@ -56,6 +56,7 @@
 					placeholder="yyyy-MM-dd" />
 			</div>
 		</div>
+		
 		<div class="form-group">
 			<form:label path="address" for="address"
 				class="col-sm-3 control-label">Address</form:label>
@@ -64,30 +65,23 @@
 					class="form-control" placeholder="Address" />
 			</div>
 		</div>
-
-		<%--   <div class="form-group">
-                    <form:label path="gender" class="control-label col-sm-3">Gender</form:label>
-                    <div class="col-sm-6">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <form:label path="gender" class="radio-inline">
-                                    <form:input path="gender" type="radio" id="femaleRadio" value="Female"/>Female
-                                </form:label>
-                            </div>
-                            <div class="col-sm-4">
-                                <form:label path="gender" class="radio-inline">
-                                    <form:input path="gender" type="radio" id="maleRadio" value="Male"/>Male
-                                </form:label>
-                            </div>
-                            <div class="col-sm-4">
-                                <form:label path="gender" class="radio-inline">
-                                    <form:input path="gender" type="radio" id="uncknownRadio" value="Unknown"/>Third Gender
-                                </form:label>
-                            </div>
-                        </div>
-                    </div> --%>
-
-		<!-- /.form-group -->
+		
+		<div class="form-group">
+			<form:label path="gender" for="gender"
+				class="col-sm-3 control-label">Gender</form:label>
+			<div class="col-sm-9">&nbsp;&nbsp;
+				<form:radiobutton path="gender" value="male" />Male &nbsp;&nbsp;&nbsp;<form:radiobutton
+					path="gender" value="female" />Female&nbsp;&nbsp;&nbsp;<form:radiobutton
+					path="gender" value="other" />Other
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="col-sm-9">
+				<form:input path="roleId" type="hidden" id="address"
+					class="form-control" placeholder="roleId" />
+			</div>
+		</div>
 
 		<div class="form-group">
 			<div class="col-sm-9 col-sm-offset-3">
@@ -110,9 +104,6 @@
 
 <!-- ./container -->
 
-<hr>
-<hr>
-<hr>
-<hr>
+
 
 <%@ include file="Common-Footer.jsp"%>

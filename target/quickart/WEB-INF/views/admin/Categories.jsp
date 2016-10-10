@@ -86,7 +86,6 @@
 										value="${category.categoryId}" name="categoryId"
 										placeholder="${category.categoryId}" readonly="true">
 								</div>
-
 								<div class="form-group">
 									<label for="name" class="control-label">Category Name</label> <input
 										type="text" class="form-control" name="categoryName"

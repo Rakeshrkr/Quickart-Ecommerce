@@ -70,13 +70,24 @@
 						class="glyphicon glyphicon-earphone"></span> Contact Us</a></li>
 
 				<c:choose>
-					<c:when test="${user==null}">
+					<c:when test="${RoleId==null}">
 						<li><a href="addUser"><span
 								class="glyphicon glyphicon-user" id="signupbutton"></span> Sign
 								Up</a></li>
 						<li><a href="Login"><span
 								class="glyphicon glyphicon-log-in" id="loginbutton"></span>
 								Login</a></li>
+					</c:when>
+
+					<c:when test="${RoleId=='ROLE_ADMIN'}">
+						<li class="dropdown dropdown clearfix"><a href="#"
+							class="dropdown-toggle" data-toggle="dropdown"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								${user}<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+								<li><a href="logout">LogOut</a></li>
+						</ul>
+						</li>
 					</c:when>
 					<c:otherwise>
 
@@ -102,8 +113,6 @@
 				<li><a href="/quickart">Shopping</a>
 				<li><a href="/quickart">About Us</a>
 			</ul>
-
-
 		</div>
 		<!--navbar collapse items ends-->
 	</div>
@@ -164,12 +173,11 @@
 
 						</c:when>
 						<c:otherwise>
-								<div class="btn-group">
-										<a id="bb1" href="" class="btn btn-primary">Download App</a> <a
-											id="bb2" href="#shopping" class="btn btn-info">Visit
-											Store</a> <a id="bb3" href="" class="btn btn-primary"> Spread
-											the word</a>
-									</div>
+							<div class="btn-group">
+								<a id="bb1" href="" class="btn btn-primary">Download App</a> <a
+									id="bb2" href="#shopping" class="btn btn-info">Visit Store</a>
+								<a id="bb3" href="" class="btn btn-primary"> Spread the word</a>
+							</div>
 						</c:otherwise>
 					</c:choose>
 				</div>

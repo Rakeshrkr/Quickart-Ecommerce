@@ -11,28 +11,28 @@
 					<div class="col-sm-12">
 						<div>
 							<form:form class="form-inline" method="post" action="addProduct"
-								enctype="multipart/form-data" modelAttribute="Product">
+								 commandName="Product" enctype="multipart/form-data">
 								<table style="width: 100%">
 									<tr>
 										<td>
 											<div class="form-group" style="padding: 20px">
 												<form:label for="productId" path="productId">&nbsp;&nbsp;Product Id&nbsp;&nbsp;:</form:label>
 												<form:input type="text" class="form-control"
-													Style="background-color: #cce6ff;" name="productId"
+													Style="background-color: #cce6ff;" 
 													path="productId" placeholder=" Product Id" />
 											</div>
 										</td>
 										<td><div class="form-group" style="padding: 20px">
 												<form:label for="productName" path="productName">Product Name&nbsp;:</form:label>
 												<form:input type="text" class="form-control"
-													Style="background-color: #cce6ff;" name="productName"
+													Style="background-color: #cce6ff;" 
 													path="productName" placeholder="Enter Product" />
 											</div></td>
 										<td>
 											<div class="form-group" style="padding: 20px">
 												<form:label for="quantity" path="quantity">Quantity&nbsp;:</form:label>
 												<form:input type="text" class="form-control"
-													Style="background-color: #cce6ff;" name="quantity"
+													Style="background-color: #cce6ff;" 
 													path="quantity" placeholder="00" />
 											</div>
 										</td>
@@ -42,7 +42,7 @@
 										<td><div class="form-group" style="padding: 20px">
 												<form:label for="category" path="category"> &nbsp;&nbsp;Category &nbsp;&nbsp;: </form:label>
 												<form:select class="form-control"
-													Style="background-color: #cce6ff;" name="category"
+													Style="background-color: #cce6ff;" 
 													path="category">
 													<form:option value="NONE"
 														label="---------- Select ----------" />
@@ -52,7 +52,7 @@
 										<td><div class="form-group" style="padding: 20px">
 												<form:label for="supplier" path="supplier"> Supplier Name&nbsp;: </form:label>
 												<form:select class="form-control"
-													Style="background-color: #cce6ff;" name="supplier"
+													Style="background-color: #cce6ff;" 
 													path="supplier">
 													<form:option value="NONE"
 														label="---------- Select ----------" />
@@ -63,7 +63,7 @@
 										<td><div class="form-group" style="padding: 20px">
 												<form:label for="price" path="price">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price&nbsp;: </form:label>
 												<form:input type="text" class="form-control"
-													Style="background-color: #cce6ff;" name="price"
+													Style="background-color: #cce6ff;" 
 													placeholder="Enter Price" path="price" />
 											</div></td>
 									</tr>
@@ -71,28 +71,23 @@
 										<td><div class="form-group" style="padding: 20px">
 												<form:label for="description" path="description">Description&nbsp;: </form:label>
 												<form:input type="text" class="form-control"
-													Style="background-color: #cce6ff;" name="description"
+													Style="background-color: #cce6ff;" 
 													placeholder="description" path="description" />
 											</div></td>
 										<td>
 
-											<div class="form-group" style="padding: 20px">
-												<form:label for="image" path="image">Image&nbsp;: </form:label>
+											 <div class="form-group" style="padding: 20px">
+												<form:label for="image" path="image"> </form:label>
 												<form:input type="file" class="form-control"
 													Style="background-color: #cce6ff;" name="image"
-													placeholder="image" path="image" />
-											</div>
+													 path="image" />
+											</div> 
 
 										</td>
 									</tr>
 
 
 								</table>
-
-
-
-
-
 								<form:button type="submit" class="btn btn-primary">Submit</form:button>
 
 								<hr>
@@ -126,9 +121,8 @@
 
 								<td>${product.productId}</td>
 								<td>${product.productName}</td>
-								<td>${product.getSupplier() }</td>
-
-								<td>${product.getCategory()}</td>
+								<td>${product.supplier.supplierName }</td>
+								<td>${product.category.categoryName}</td>
 								<td>${product.quantity}</td>
 								<td>${product.price}</td>
 								<td><a href="delete/${product.productId}"
@@ -181,6 +175,24 @@
 									<label for="name" class="control-label">Price</label> <input
 										type="text" class="form-control" name="price"
 										value="${product.price}" placeholder="Enter New Price">
+								</div>
+								
+								<div class="form-group">
+									<label for="description" class="control-label">Description</label> <input
+										type="text" class="form-control" name="description"
+										value="${product.description}" placeholder="New Description">
+								</div>
+								
+								<div class="form-group">
+									 <label for="supplier" class="control-label">Supplier</label>  <input
+										type="text" class="form-control" name="supplier"
+										value="${product.supplier}" placeholder="Enter Supplier" readonly="true">
+								</div>
+								
+								<div class="form-group">
+									 <label for="category" class="control-label">Category</label>  <input
+										type="text" class="form-control" name="category"
+										value="${product.category}" placeholder="Enter Category" readonly="true">
 								</div>
 							</div>
 

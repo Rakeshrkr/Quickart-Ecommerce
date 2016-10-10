@@ -1,4 +1,5 @@
 com\quickart\controller\LoginController.class
 com\quickart\util\FileUtilClass.class
 com\quickart\controller\ProductController.class
+com\quickart\controller\AdminController.class
 com\quickart\controller\RegisterController.class
