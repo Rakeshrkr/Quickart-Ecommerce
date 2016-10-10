@@ -5,15 +5,13 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,11 +26,15 @@ import com.ecommerce.quickart.dao.CategoryDao;
 import com.ecommerce.quickart.dao.ProductDao;
 import com.ecommerce.quickart.dao.SupplierDao;
 import com.ecommerce.quickart.dao.UserDetailsDao;
-import com.ecommerce.quickart.model.*;
-import com.quickart.util.FileUtilClass;
+import com.ecommerce.quickart.model.Category;
+import com.ecommerce.quickart.model.Product;
+import com.ecommerce.quickart.model.Supplier;
+import com.ecommerce.quickart.model.UserDetails;
 
 @Controller
-public class ProductController implements ServletContextAware {
+public class AdminController implements ServletContextAware {
+	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
+	
 	@Autowired
 	private ProductDao productDao;
 
@@ -59,75 +61,16 @@ public class ProductController implements ServletContextAware {
 
 	private ServletContext servletContext;
 
-	private String path = "H:\\quickartImg\\img";
-
+	
 	@ModelAttribute("Product")
 	public Product myProduct() {
 		return new Product();
 	}
-
-	/*
-	 * ===========================================Loging-Logout=================
-	 * ========================
-	 */
-	@RequestMapping(value = "/Login", method = RequestMethod.POST)
-	public ModelAndView GoToHome(@RequestParam String name, @RequestParam String password, ModelMap model,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		HttpSession session = request.getSession();
-		userDetails = userDetailsDao.isValidUser(name, password);
-
-		ModelAndView mv = null;
-		if (userDetails == null) {
-			mv = new ModelAndView("Login");
-			mv.addObject("errorMessage", "Invalid Credential , Please enter correct user name and password!");
-		} else {
-			if (userDetails.getRoleId().equals("ROLE_ADMIN")) {
-				mv = new ModelAndView("redirect:/admin/addProduct");
-				String fullName = userDetails.getFullName();
-				String RoleId = userDetails.getRoleId();
-				session.setAttribute("user", fullName);
-				session.setAttribute("RoleId", RoleId);
-				List<Product> productList = productDao.getAllProduct();
-				List<Category> categoryList = categoryDao.CategoryList();
-				List<Supplier> supplierList = supplierDao.SupplierList();
-				mv.addObject("ProductList", productList);
-				mv.addObject("CategoryList", categoryList);
-				mv.addObject("SupplierList", supplierList);
-			} else if (userDetails.getRoleId().equals("ROLE_USER")) {
-				mv = new ModelAndView("index");
-				String fullName = userDetails.getFullName();
-				String RoleId = userDetails.getRoleId();
-				session.setAttribute("user", fullName);
-				session.setAttribute("RoleId", RoleId);
-				session.setAttribute("userId", userDetails.getUserId());
-			}
-		}
-		return mv;
-	}
-
-	@RequestMapping(value = "/logout")
-	public String goToindex(HttpServletRequest request, HttpServletResponse response) {
-		HttpSession session = request.getSession();
-		session.setAttribute("user", null);
-		session.invalidate();
-		return "index";
-	}
-
-	@RequestMapping(value = "admin/logout")
-	public ModelAndView goToindexs(HttpServletRequest request, HttpServletResponse response) {
-		HttpSession session = request.getSession();
-		ModelAndView mv = new ModelAndView("redirect:/logout");
-		session.setAttribute("user", null);
-		session.invalidate();
-		return mv;
-	}
-	/*
-	 * ========================================Admin-Product-CRUD===============
-	 * =============================
-	 */
+/*=======ADMIN Product-CRUD==============================================*/
 
 	@RequestMapping(value = "/admin/addProduct", method = RequestMethod.GET)
 	public ModelAndView goToAddProduct() {
+		logger.info(" Admin-AddProduct (goToAddProduct GET method) begins here! ");
 		List<Product> productList = productDao.getAllProduct();
 		List<Category> categorylist = categoryDao.CategoryList();
 		List<Supplier> supplierlist = supplierDao.SupplierList();
@@ -141,6 +84,7 @@ public class ProductController implements ServletContextAware {
 		mav.addObject("supplierlist", supplierlist);
 		Product product = new Product();
 		mav.addObject("Product", product);
+		logger.info(" Admin-AddProduct (goToAddProduct GET method) ends here! ");
 		return mav;
 	}
 
@@ -148,6 +92,7 @@ public class ProductController implements ServletContextAware {
 	public ModelAndView ForAddingProducts(@Valid @ModelAttribute("Product") Product product, BindingResult result,
 			@RequestParam(value = "category") String category1, @RequestParam(value = "supplier") String supplier1,
 			@RequestParam(value = "image", required = false) MultipartFile image) {
+		logger.info(" Admin-AddProduct (goToAddProduct POST method) begins here! ");
 
 		if (!image.isEmpty()) {
 			try {
@@ -171,53 +116,74 @@ public class ProductController implements ServletContextAware {
 		product.setSupplier(supplierDao.getSupplierByName(supplier1));
 		product.setCategory(categoryDao.getCategoryByName(category1));
 		productDao.addProduct(product);
+		logger.info(" Admin-AddProduct (goToAddProduct POST method) ends here! ");
 
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/admin/edit/{productId}", method = RequestMethod.POST)
-	public ModelAndView updation(@PathVariable("productId") int productId, @ModelAttribute("product") Product product) { //
-		productDao.editProduct(product);
+	@RequestMapping(value = "/admin/edit/{Id}", method = RequestMethod.POST)
+	public ModelAndView updation(@PathVariable("Id") int productId, @RequestParam(value = "productName") String productName,
+		@RequestParam(value = "quantity") int quantity,@RequestParam(value = "price") float price,@RequestParam(value = "description") String description,
+		@RequestParam(value = "category") String category1, @RequestParam(value = "supplier") String supplier1) { //
+		logger.info(" Admin-EditProduct (Updation method) begins here with product name "+ product.getProductName());
+		
+		Product product1 = productDao.getProduct(productId) ;
+		product1.setSupplier(supplierDao.getSupplierByName(supplier1));
+		product1.setCategory(categoryDao.getCategoryByName(category1));
+		product1.setPrice(price);
+		product1.setDescription(description);
+		product1.setProductName(productName);
+		product1.setQuantity(quantity);
+	
+		productDao.editProduct(product1);
 		ModelAndView modelAndView = new ModelAndView("redirect:/admin/addProduct");
+		
+		logger.info(" Admin-EditProduct (Updation method) ends here! ");
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/admin/delete/{productId}", method = RequestMethod.GET)
 	public ModelAndView deleteproduct(@PathVariable int productId) {
+		logger.info(" Admin-DeleteProduct (deleteproduct method) begins here! ");
 		productDao.deleteProduct(productId);
 		ModelAndView modelAndView = new ModelAndView("redirect:/admin/addProduct");
 		List<Product> productList = productDao.getAllProduct();
 		modelAndView.addObject("ProductList", productList);
+		logger.info(" Admin-DeleteProduct (deleteproduct method) ends here! ");
 		return modelAndView;
 	}
 
-	/*
-	 * ==================================Admin-Category-CRUD======================
-	 * =============================
-	 */
+	
+	 /*=================Admin-Category-CRUD========================*/
+	
 
 	@RequestMapping(value = "/admin/Categories")
 	public ModelAndView Categories() {
+		logger.info(" Admin-Categories (Categories method) begins here! ");
 		List<Category> categoryList = categoryDao.CategoryList();
 		ModelAndView mav = new ModelAndView("admin/Categories");
 		mav.addObject("Category", category);
 		mav.addObject("CategoryList", categoryList);
+		logger.info(" Admin-Categories (Categories method) ends here! ");
 		return mav;
 	}
 
 	@RequestMapping(value = "/admin/addCategory")
 	public ModelAndView goToAddCategory() {
+		logger.info(" Admin-AddCategory (goToAddCategory method) begins here! ");
 		List<Category> categoryList = categoryDao.CategoryList();
 		ModelAndView mav = new ModelAndView("admin/Categories");
 		boolean isCategoryClicked = true;
 		mav.addObject("isCategoryClicked", isCategoryClicked);
 		mav.addObject("CategoryList", categoryList);
 		mav.addObject("Category", category);
+		logger.info(" Admin-AddCategory (goToAddCategory method) ends here! ");
 		return mav;
 	}
 
 	@RequestMapping(value = "/admin/addCategory", method = RequestMethod.POST)
 	public ModelAndView ForAddingCategory(@ModelAttribute("Category") Category category, BindingResult result) {
+		logger.info(" Admin-AddCategory (forAddingCategory - POST method) begins here! ");
 		ModelAndView modelAndView = new ModelAndView("redirect:/admin/addCategory");
 
 		List<Category> categoryList = categoryDao.CategoryList();
@@ -227,56 +193,65 @@ public class ProductController implements ServletContextAware {
 			categoryDao.saveCategory(category);
 
 			modelAndView.addObject("CategoryList", categoryList);
-
+			logger.info(" Admin-AddCategory (forAddingCategory - POST method) ends here! ");
 			return modelAndView;
 		}
+		
 	}
 
 	@RequestMapping(value = "/admin/editC/{categoryId}", method = RequestMethod.POST)
 	public ModelAndView updationCategory(@PathVariable("categoryId") int categoryId,
-			@ModelAttribute("category") Category category) { //
+			@ModelAttribute("category") Category category) { 
+		logger.info(" Admin-EDITCategory (updationCategory - POST method) begins here! ");
 		category.setCategoryId(categoryId);
 		categoryDao.updateCategory(category);
 		ModelAndView modelAndView = new ModelAndView("redirect:/admin/addCategory");
+		logger.info(" Admin-EDITCategory (updationCategory - POST method) ends here! ");
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/admin/deleteC/{categoryId}", method = RequestMethod.GET)
 	public ModelAndView deleteCategory(@PathVariable int categoryId) {
+		logger.info(" Admin-DeleteCategory (deleteCategory - GET method) begins here! ");
 		categoryDao.deleteCategory(categoryId);
 		ModelAndView modelAndView = new ModelAndView("redirect:/admin/addCategory");
 		List<Category> categoryList = categoryDao.CategoryList();
 		modelAndView.addObject("CategoryList", categoryList);
+		logger.info(" Admin-DeleteCategory (deleteCategory - GET method) ends here! ");
 		return modelAndView;
 	}
 
-	/*
-	 * ======================================Admin-Supplier-CRUD================
-	 * =============================
-	 */
+	
+	/*===========================Admin-Supplier-CRUD================*/
+	 
 
 	@RequestMapping(value = "/admin/Suppliers")
 	public ModelAndView Suppliers() {
+		logger.info(" Admin-Suppliers (Suppliers - GET method) begins here! ");
 		List<Supplier> supplierList = supplierDao.SupplierList();
 		ModelAndView mav = new ModelAndView("admin/Suppliers");
 		mav.addObject("Supplier", supplier);
 		mav.addObject("SupplierList", supplierList);
+		logger.info(" Admin-Suppliers (Suppliers - GET method) ends here! ");
 		return mav;
 	}
 
 	@RequestMapping(value = "/admin/addSupplier")
 	public ModelAndView goToAddSupplier() {
+		logger.info(" Admin-goToAddSupplier (goToAddSupplier - GET method) begins here! ");
 		List<Supplier> supplierList = supplierDao.SupplierList();
 		ModelAndView mav = new ModelAndView("admin/Suppliers");
 		boolean isSupplierClicked = true;
 		mav.addObject("isSupplierClicked", isSupplierClicked);
 		mav.addObject("Supplier", supplier);
 		mav.addObject("SupplierList", supplierList);
+		logger.info(" Admin-goToAddSupplier (goToAddSupplier - GET method) ends here! ");
 		return mav;
 	}
 
 	@RequestMapping(value = "/admin/addSupplier", method = RequestMethod.POST)
 	public ModelAndView ForAddingSupplier(@ModelAttribute("Supplier") Supplier supplier, BindingResult result) {
+		logger.info(" Admin-ForAddingSupplier (ForAddingSupplier - POST method) begins here! ");
 		ModelAndView modelAndView = new ModelAndView("redirect:/admin/addSupplier");
 
 		List<Supplier> supplierList = supplierDao.SupplierList();
@@ -285,27 +260,34 @@ public class ProductController implements ServletContextAware {
 		} else {
 			supplierDao.saveSupplier(supplier);
 			modelAndView.addObject("SupplierList", supplierList);
+			logger.info(" Admin-ForAddingSupplier (ForAddingSupplier - POST method) ends here! ");
 			return modelAndView;
 		}
 	}
 
 	@RequestMapping(value = "/admin/editS/{supplierId}", method = RequestMethod.POST)
 	public ModelAndView updationSupplier(@PathVariable("supplierId") int supplierId,
-			@ModelAttribute("supplier") Supplier supplier) { //
+			@ModelAttribute("supplier") Supplier supplier) { 
+		logger.info(" Admin-updationSupplier (updationSupplier - POST method) begins here! ");
 		supplier.setSupplierId(supplierId);
 		supplierDao.updateSupplier(supplier);
 		ModelAndView modelAndView = new ModelAndView("redirect:/admin/addSupplier");
+		logger.info(" Admin-updationSupplier (updationSupplier - POST method) ends here! ");
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/admin/deleteS/{supplierId}", method = RequestMethod.GET)
 	public ModelAndView deleteSupplier(@PathVariable int supplierId) {
+		logger.info(" Admin-deleteSupplier (deleteSupplier - GET method) begins here! ");
 		supplierDao.deleteSupplier(supplierId);
 		ModelAndView modelAndView = new ModelAndView("redirect:/admin/addSupplier");
 		List<Supplier> supplierList = supplierDao.SupplierList();
 		modelAndView.addObject("SupplierList", supplierList);
+		logger.info(" Admin-deleteSupplier (deleteSupplier - GET method) ends here! ");
 		return modelAndView;
 	}
+	
+	/*======================Functions Regarding Image Uploading=========*/
 
 	public void setServletContext(ServletContext servletContext) {
 		this.servletContext = servletContext;
@@ -320,7 +302,7 @@ public class ProductController implements ServletContextAware {
 
 	private void saveImage(String filename, MultipartFile image) throws RuntimeException, IOException {
 		try {
-			File file = new File(servletContext.getRealPath("/") + "/" + filename);
+			File file = new File(servletContext.getRealPath("/") + "/WEB-INF/resources/images/" + filename);
 
 			FileUtils.writeByteArrayToFile(file, image.getBytes());
 			System.out.println("Go to the location:  " + file.toString()

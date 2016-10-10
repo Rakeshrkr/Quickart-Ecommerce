@@ -11,7 +11,7 @@
 					<div class="col-sm-12">
 						<div>
 							<form:form class="form-inline" method="post" action="addProduct"
-								 modelAttribute="Product" enctype="multipart/form-data">
+								 commandName="Product" enctype="multipart/form-data">
 								<table style="width: 100%">
 									<tr>
 										<td>
@@ -77,7 +77,7 @@
 										<td>
 
 											 <div class="form-group" style="padding: 20px">
-												<form:label for="image" path="image">Image&nbsp;: </form:label>
+												<form:label for="image" path="image"> </form:label>
 												<form:input type="file" class="form-control"
 													Style="background-color: #cce6ff;" name="image"
 													 path="image" />
@@ -178,15 +178,21 @@
 								</div>
 								
 								<div class="form-group">
-									<label for="supplier" class="control-label">Supplier</label> <input
-										type="text" class="form-control" name="supplier"
-										value="${product.supplier}" placeholder="Enter Supplier">
+									<label for="description" class="control-label">Description</label> <input
+										type="text" class="form-control" name="description"
+										value="${product.description}" placeholder="New Description">
 								</div>
 								
 								<div class="form-group">
-									<label for="category" class="control-label">Category</label> <input
+									 <label for="supplier" class="control-label">Supplier</label>  <input
+										type="text" class="form-control" name="supplier"
+										value="${product.supplier}" placeholder="Enter Supplier" readonly="true">
+								</div>
+								
+								<div class="form-group">
+									 <label for="category" class="control-label">Category</label>  <input
 										type="text" class="form-control" name="category"
-										value="${product.category}" placeholder="Enter Category">
+										value="${product.category}" placeholder="Enter Category" readonly="true">
 								</div>
 							</div>
 
