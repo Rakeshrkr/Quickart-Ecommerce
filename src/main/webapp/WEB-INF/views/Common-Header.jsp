@@ -4,10 +4,13 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
+<%-- <meta name="_csrf" content="${_csrf.token}" />
+<!-- default header name is X-CSRF-TOKEN -->
+<meta name="_csrf_header" content="${_csrf.headerName}" /> --%>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta charset='utf-8' />
 <title>Quickart</title>
@@ -63,50 +66,47 @@
 		<!--navbar header ends-->
 		<div class="collapse nav nav-collapse navbar-collapse"
 			id="navbar-collapse">
-			<!--navbar collapse items-->
+
 			<ul class="nav navbar-nav navbar-right">
 
-				<li><a href="ContactUs"><span
-						class="glyphicon glyphicon-earphone"></span> Contact Us</a></li>
+				<c:if test="${empty pageContext.request.userPrincipal}">
 
-				<c:choose>
-					<c:when test="${RoleId==null}">
-						<li><a href="addUser"><span
-								class="glyphicon glyphicon-user" id="signupbutton"></span> Sign
-								Up</a></li>
-						<li><a href="Login"><span
-								class="glyphicon glyphicon-log-in" id="loginbutton"></span>
-								Login</a></li>
-					</c:when>
+					<li><a href="ContactUs"><span
+							class="glyphicon glyphicon-earphone"></span> Contact Us</a></li>
+					<li><a href="addUser"><span
+							class="glyphicon glyphicon-user" id="signupbutton"></span> Sign
+							Up</a></li>
+					<li><a href="login"><span
+							class="glyphicon glyphicon-log-in" id="loginbutton"></span> Login</a></li>
+				</c:if>
 
-					<c:when test="${RoleId=='ROLE_ADMIN'}">
-						<li class="dropdown dropdown clearfix"><a href="#"
-							class="dropdown-toggle" data-toggle="dropdown"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-								${user}<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-								<li><a href="logout">LogOut</a></li>
-						</ul>
-						</li>
-					</c:when>
-					<c:otherwise>
+				<c:if test="${not empty pageContext.request.userPrincipal}">
+
+					<li><a href="ContactUs"><span
+							class="glyphicon glyphicon-earphone"></span> Contact Us</a></li>
+
+					<c:if test="${pageContext.request.isUserInRole('ROLE_USER')}">
 
 						<li><a style="color: white" href="" id="cart"> <span
 								class="glyphicon glyphicon-shopping-cart"></span>Cart<span
 								class="badge">0</span></a></li>
 
-						<li class="dropdown dropdown clearfix"><a href="#"
-							class="dropdown-toggle" data-toggle="dropdown"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-								${user}<b class="caret"></b>
-						</a>
-							<ul class="dropdown-menu">
-								<li><a href="logout">LogOut</a></li>
-							</ul></li>
+					</c:if>
 
-					</c:otherwise>
-				</c:choose>
+
+					<li class="dropdown dropdown clearfix"><a href="#"
+						class="dropdown-toggle" data-toggle="dropdown"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+							${user}<b class="caret"></b>
+					</a>
+						<ul class="dropdown-menu">
+							<li><a href="logout">LogOut</a></li>
+							
+						</ul>
+					</li>
+				</c:if>
 			</ul>
+
 			<ul style="font-size: 0.9vw" class="nav navbar-nav">
 				<li><a href="/quickart">Home</a>
 				<li><a href="/quickart">Gallary</a>
@@ -132,34 +132,40 @@
 					<h1>Quickart</h1>
 					<p>Find and buy everything you need - Cloths, electronics and
 						many more</p>
-					<c:choose>
-						<c:when test="${RoleId == 'ROLE_ADMIN'}">
-							<c:choose>
+					<c:if test="${ empty pageContext.request.userPrincipal}">
+
+						<div class="btn-group">
+							<a id="bb1" href="" class="btn btn-primary">Download App</a> <a
+								id="bb2" href="#shopping" class="btn btn-info">Visit Store</a> <a
+								id="bb3" href="" class="btn btn-primary"> Spread the word</a>
+						</div>
+					</c:if>
+					<c:if test="${not empty pageContext.request.userPrincipal}">
+					   <c:if test="${pageContext.request.isUserInRole('ROLE_ADMIN')}">
+					     <c:choose>
 								<c:when test="${isProductClicked == true}">
 									<div class="btn-group" id="selector">
 										<button id="b1" onclick="location.href='addCategory'"
 											class="btn btn-primary ">Categories</button>
-										<button id="b2" onclick="location.href='addProduct'"
+										<button id="b2" onclick="location.href='admin/addProduct'"
 											class="btn btn-primary active">Products</button>
 										<button id="b3" onclick="location.href='addSupplier'"
 											class="btn btn-primary ">Suppliers</button>
 									</div>
 								</c:when>
-
 								<c:when test="${isSupplierClicked == true}">
 									<div class="btn-group" id="selector">
 										<button id="b1" onclick="location.href='addCategory'"
 											class="btn btn-primary ">Categories</button>
 										<button id="b2" onclick="location.href='addProduct'"
 											class="btn btn-primary ">Products</button>
-										<button id="b3" onclick="location.href='addSupplier'"
+										<button id="b3" onclick="location.href='admin/addSupplier'"
 											class="btn btn-primary active">Suppliers</button>
 									</div>
 								</c:when>
-
 								<c:when test="${isCategoryClicked == true}">
 									<div class="btn-group" id="selector">
-										<button id="b1" onclick="location.href='addCategory'"
+										<button id="b1" onclick="location.href='admin/addCategory'"
 											class="btn btn-primary active">Categories</button>
 										<button id="b2" onclick="location.href='addProduct'"
 											class="btn btn-primary ">Products</button>
@@ -167,19 +173,20 @@
 											class="btn btn-primary ">Suppliers</button>
 									</div>
 								</c:when>
-
 							</c:choose>
-
-
-						</c:when>
-						<c:otherwise>
-							<div class="btn-group">
-								<a id="bb1" href="" class="btn btn-primary">Download App</a> <a
-									id="bb2" href="#shopping" class="btn btn-info">Visit Store</a>
-								<a id="bb3" href="" class="btn btn-primary"> Spread the word</a>
-							</div>
-						</c:otherwise>
-					</c:choose>
+					   </c:if>
+					
+					<c:if test="${pageContext.request.isUserInRole('ROLE_USER')}">
+					<div class="btn-group">
+							<a id="bb1" href="" class="btn btn-primary">Download App</a> <a
+								id="bb2" href="#shopping" class="btn btn-info">Visit Store</a> <a
+								id="bb3" href="" class="btn btn-primary"> Spread the word</a>
+						</div>
+					
+					</c:if>
+					
+					</c:if>
+				
 				</div>
 			</div>
 		</div>

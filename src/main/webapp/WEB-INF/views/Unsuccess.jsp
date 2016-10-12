@@ -29,19 +29,20 @@
 					<div class="jumbotron">
 						<h4>Login Failure unknown username or a bad password</h4>
 						<br />
-						<p>Please Retry</p>
-						<br />
-						<button type="button" onclick="location.href='Login'"
+						
+						<button type="button" onclick="location.href='login'"
 							class="btn btn-primary">Login Again</button>
-						<p></p>
+						<p>
+						<p>Please Retry</p>
+						<br /></p>
 					</div>
 				</div>
-				<table width="50%" align="center"
+				 <table width="50%" align="center"
 					style="margin-top: 3%; box-shadow: 0px 9px 30px #888888;">
 					<tr>
 						<td></td>
 					</tr>
-				</table>
+				</table> 
 			</td>
 		</tr>
 	</table>

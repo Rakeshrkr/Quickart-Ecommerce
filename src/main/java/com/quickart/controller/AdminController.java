@@ -32,6 +32,7 @@ import com.ecommerce.quickart.model.Supplier;
 import com.ecommerce.quickart.model.UserDetails;
 
 @Controller
+@RequestMapping(value = "/admin")
 public class AdminController implements ServletContextAware {
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 	
@@ -68,7 +69,7 @@ public class AdminController implements ServletContextAware {
 	}
 /*=======ADMIN Product-CRUD==============================================*/
 
-	@RequestMapping(value = "/admin/addProduct", method = RequestMethod.GET)
+	@RequestMapping(value = "/addProduct", method = RequestMethod.GET)
 	public ModelAndView goToAddProduct() {
 		logger.info(" Admin-AddProduct (goToAddProduct GET method) begins here! ");
 		List<Product> productList = productDao.getAllProduct();
@@ -79,6 +80,7 @@ public class AdminController implements ServletContextAware {
 
 		boolean isProductClicked = true;
 		mav.addObject("isProductClicked", isProductClicked);
+		
 		mav.addObject("categorylist", categorylist);
 		mav.addObject("ProductList", productList);
 		mav.addObject("supplierlist", supplierlist);
@@ -88,7 +90,7 @@ public class AdminController implements ServletContextAware {
 		return mav;
 	}
 
-	@RequestMapping(value = "/admin/addProduct", method = RequestMethod.POST)
+	@RequestMapping(value = "/addProduct", method = RequestMethod.POST)
 	public ModelAndView ForAddingProducts(@Valid @ModelAttribute("Product") Product product, BindingResult result,
 			@RequestParam(value = "category") String category1, @RequestParam(value = "supplier") String supplier1,
 			@RequestParam(value = "image", required = false) MultipartFile image) {
@@ -121,7 +123,7 @@ public class AdminController implements ServletContextAware {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/admin/edit/{Id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/edit/{Id}", method = RequestMethod.POST)
 	public ModelAndView updation(@PathVariable("Id") int productId, @RequestParam(value = "productName") String productName,
 		@RequestParam(value = "quantity") int quantity,@RequestParam(value = "price") float price,@RequestParam(value = "description") String description,
 		@RequestParam(value = "category") String category1, @RequestParam(value = "supplier") String supplier1) { //
@@ -142,7 +144,7 @@ public class AdminController implements ServletContextAware {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/admin/delete/{productId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/delete/{productId}", method = RequestMethod.GET)
 	public ModelAndView deleteproduct(@PathVariable int productId) {
 		logger.info(" Admin-DeleteProduct (deleteproduct method) begins here! ");
 		productDao.deleteProduct(productId);
@@ -157,7 +159,7 @@ public class AdminController implements ServletContextAware {
 	 /*=================Admin-Category-CRUD========================*/
 	
 
-	@RequestMapping(value = "/admin/Categories")
+	@RequestMapping(value = "/Categories")
 	public ModelAndView Categories() {
 		logger.info(" Admin-Categories (Categories method) begins here! ");
 		List<Category> categoryList = categoryDao.CategoryList();
@@ -168,7 +170,7 @@ public class AdminController implements ServletContextAware {
 		return mav;
 	}
 
-	@RequestMapping(value = "/admin/addCategory")
+	@RequestMapping(value = "/addCategory")
 	public ModelAndView goToAddCategory() {
 		logger.info(" Admin-AddCategory (goToAddCategory method) begins here! ");
 		List<Category> categoryList = categoryDao.CategoryList();
@@ -181,7 +183,7 @@ public class AdminController implements ServletContextAware {
 		return mav;
 	}
 
-	@RequestMapping(value = "/admin/addCategory", method = RequestMethod.POST)
+	@RequestMapping(value = "/addCategory", method = RequestMethod.POST)
 	public ModelAndView ForAddingCategory(@ModelAttribute("Category") Category category, BindingResult result) {
 		logger.info(" Admin-AddCategory (forAddingCategory - POST method) begins here! ");
 		ModelAndView modelAndView = new ModelAndView("redirect:/admin/addCategory");
@@ -199,7 +201,7 @@ public class AdminController implements ServletContextAware {
 		
 	}
 
-	@RequestMapping(value = "/admin/editC/{categoryId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/editC/{categoryId}", method = RequestMethod.POST)
 	public ModelAndView updationCategory(@PathVariable("categoryId") int categoryId,
 			@ModelAttribute("category") Category category) { 
 		logger.info(" Admin-EDITCategory (updationCategory - POST method) begins here! ");
@@ -210,7 +212,7 @@ public class AdminController implements ServletContextAware {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/admin/deleteC/{categoryId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteC/{categoryId}", method = RequestMethod.GET)
 	public ModelAndView deleteCategory(@PathVariable int categoryId) {
 		logger.info(" Admin-DeleteCategory (deleteCategory - GET method) begins here! ");
 		categoryDao.deleteCategory(categoryId);
@@ -225,7 +227,7 @@ public class AdminController implements ServletContextAware {
 	/*===========================Admin-Supplier-CRUD================*/
 	 
 
-	@RequestMapping(value = "/admin/Suppliers")
+	@RequestMapping(value = "/Suppliers")
 	public ModelAndView Suppliers() {
 		logger.info(" Admin-Suppliers (Suppliers - GET method) begins here! ");
 		List<Supplier> supplierList = supplierDao.SupplierList();
@@ -236,7 +238,7 @@ public class AdminController implements ServletContextAware {
 		return mav;
 	}
 
-	@RequestMapping(value = "/admin/addSupplier")
+	@RequestMapping(value = "/addSupplier")
 	public ModelAndView goToAddSupplier() {
 		logger.info(" Admin-goToAddSupplier (goToAddSupplier - GET method) begins here! ");
 		List<Supplier> supplierList = supplierDao.SupplierList();
@@ -249,7 +251,7 @@ public class AdminController implements ServletContextAware {
 		return mav;
 	}
 
-	@RequestMapping(value = "/admin/addSupplier", method = RequestMethod.POST)
+	@RequestMapping(value = "/addSupplier", method = RequestMethod.POST)
 	public ModelAndView ForAddingSupplier(@ModelAttribute("Supplier") Supplier supplier, BindingResult result) {
 		logger.info(" Admin-ForAddingSupplier (ForAddingSupplier - POST method) begins here! ");
 		ModelAndView modelAndView = new ModelAndView("redirect:/admin/addSupplier");
@@ -265,7 +267,7 @@ public class AdminController implements ServletContextAware {
 		}
 	}
 
-	@RequestMapping(value = "/admin/editS/{supplierId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/editS/{supplierId}", method = RequestMethod.POST)
 	public ModelAndView updationSupplier(@PathVariable("supplierId") int supplierId,
 			@ModelAttribute("supplier") Supplier supplier) { 
 		logger.info(" Admin-updationSupplier (updationSupplier - POST method) begins here! ");
@@ -276,7 +278,7 @@ public class AdminController implements ServletContextAware {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/admin/deleteS/{supplierId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteS/{supplierId}", method = RequestMethod.GET)
 	public ModelAndView deleteSupplier(@PathVariable int supplierId) {
 		logger.info(" Admin-deleteSupplier (deleteSupplier - GET method) begins here! ");
 		supplierDao.deleteSupplier(supplierId);
