@@ -3,6 +3,7 @@
 <br>
 <!--Login form start from here-->
 <div class="container" >
+     <h3 style="text-align:center">${registerMessage }</h3>
 	<div class="row" align="center">
 		<div class="col-sm-6 col-md-4 col-md-offset-4">
 			<div class="account-wall">
@@ -13,20 +14,19 @@
 						class="form-control" placeholder="Password" required>
 					<button class="btn btn-lg btn-primary btn-block" type="submit">
 						Sign in</button>
-					<label class="checkbox pull-right"> <input type="checkbox"
-						value="remember-me"> Remember me
-					</label> <a href="#" class="pull-left need-help">Need help? </a><span
-						class="clearfix"></span>
+					
 					<input type="hidden"
 						name="${_csrf.parameterName}" value="${_csrf.token}">
 				</form>
 			</div>
-			<a href="Register" class="text-center new-account">Create an
+			<br>
+			<a href="addUser" class="text-center new-account">Create an
 				account </a>
 		</div>
 	</div>
 </div>
 <!--Login form ends here-->
-
+<br>
+<br>
 
 <%@ include file="Common-Footer.jsp"%>

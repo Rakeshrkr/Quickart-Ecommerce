@@ -6,7 +6,7 @@
 	<div class="row" align="center">
 		<div class="col-sm-6 col-md-4 col-md-offset-4">
 			<div class="account-wall">
-				<form class="form-signin" method="post" action="Login">
+				<form name="login" value="j_spring_security_check" class="form-signin" method="post" >
 					<input type="text" name ="name" class="form-control" placeholder="User Name"
 						required autofocus >
 					<input type="password" name="password"
@@ -17,6 +17,8 @@
 						value="remember-me"> Remember me
 					</label> <a href="#" class="pull-left need-help">Need help? </a><span
 						class="clearfix"></span>
+					<input type="hidden"
+						name="${_csrf.parameterName}" value="${_csrf.token}">
 				</form>
 			</div>
 			<a href="Register" class="text-center new-account">Create an

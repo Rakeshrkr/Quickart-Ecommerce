@@ -14,7 +14,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta charset='utf-8' />
 <title>Quickart</title>
-<meta name="viewport" content="width-divice-width,initial-scale-1.0">
+
+
+
+<meta name="viewport" content=content= "width=device-width,
+	initial-scale=1">
 <script
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script
@@ -87,9 +91,9 @@
 
 					<c:if test="${pageContext.request.isUserInRole('ROLE_USER')}">
 
-						<li><a style="color: white" href="" id="cart"> <span
+						<li><a style="color: white" href="viewCartItems" id="cart"> <span
 								class="glyphicon glyphicon-shopping-cart"></span>Cart<span
-								class="badge">0</span></a></li>
+								class="badge">${cartItemSize}</span></a></li>
 
 					</c:if>
 
@@ -101,9 +105,8 @@
 					</a>
 						<ul class="dropdown-menu">
 							<li><a href="logout">LogOut</a></li>
-							
-						</ul>
-					</li>
+
+						</ul></li>
 				</c:if>
 			</ul>
 
@@ -141,8 +144,8 @@
 						</div>
 					</c:if>
 					<c:if test="${not empty pageContext.request.userPrincipal}">
-					   <c:if test="${pageContext.request.isUserInRole('ROLE_ADMIN')}">
-					     <c:choose>
+						<c:if test="${pageContext.request.isUserInRole('ROLE_ADMIN')}">
+							<c:choose>
 								<c:when test="${isProductClicked == true}">
 									<div class="btn-group" id="selector">
 										<button id="b1" onclick="location.href='addCategory'"
@@ -174,19 +177,19 @@
 									</div>
 								</c:when>
 							</c:choose>
-					   </c:if>
-					
-					<c:if test="${pageContext.request.isUserInRole('ROLE_USER')}">
-					<div class="btn-group">
-							<a id="bb1" href="" class="btn btn-primary">Download App</a> <a
-								id="bb2" href="#shopping" class="btn btn-info">Visit Store</a> <a
-								id="bb3" href="" class="btn btn-primary"> Spread the word</a>
-						</div>
-					
+						</c:if>
+
+						<c:if test="${pageContext.request.isUserInRole('ROLE_USER')}">
+							<div class="btn-group">
+								<a id="bb1" href="" class="btn btn-primary">Download App</a> <a
+									id="bb2" href="#shopping" class="btn btn-info">Visit Store</a>
+								<a id="bb3" href="" class="btn btn-primary"> Spread the word</a>
+							</div>
+
+						</c:if>
+
 					</c:if>
-					
-					</c:if>
-				
+
 				</div>
 			</div>
 		</div>

@@ -5,7 +5,6 @@
 		<h2>Buy Electronic Stuffs</h2>
 	</div>
 	<div class="row text-center">
-
 		<div class="col-lg-2 ">
 			<div class="panel panel-default">
 				<div class="panel-body">

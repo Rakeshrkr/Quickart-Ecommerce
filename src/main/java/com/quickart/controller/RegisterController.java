@@ -53,13 +53,17 @@ public class RegisterController {
 	public ModelAndView ForAddingUser(@ModelAttribute("userDetails") UserDetails userDetails, BindingResult result) {
 		logger.info("ForAddingUser method of RegisterController begins here with password " + userDetails.getPassword());
 		
-		ModelAndView modelAndView = new ModelAndView("Login");
+		
 		
 		if (result.hasErrors()) {
-			userDetailsDao.saveUserDetails(userDetails);
+			ModelAndView modelAndView = new ModelAndView("addUser");
+			
 			return modelAndView;
 		} else {
 			userDetailsDao.saveUserDetails(userDetails);
+			ModelAndView modelAndView = new ModelAndView("redirect:/index");
+			modelAndView.addObject("registerMessage", "You are Logged In Successfully.");
+			
 			logger.info("ForAddingUser method of RegisterController ends here with name " + userDetails.getFullName());
 			return modelAndView;
 		}

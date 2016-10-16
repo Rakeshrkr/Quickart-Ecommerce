@@ -30,6 +30,7 @@ import com.ecommerce.quickart.model.Category;
 import com.ecommerce.quickart.model.Product;
 import com.ecommerce.quickart.model.Supplier;
 import com.ecommerce.quickart.model.UserDetails;
+/*=Methods of these controller are meant for only Admin Role.=*/
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -69,9 +70,12 @@ public class AdminController implements ServletContextAware {
 	}
 /*=======ADMIN Product-CRUD==============================================*/
 
+	
+	//This method starts only when admin click product button for CRUD operation
 	@RequestMapping(value = "/addProduct", method = RequestMethod.GET)
 	public ModelAndView goToAddProduct() {
 		logger.info(" Admin-AddProduct (goToAddProduct GET method) begins here! ");
+		
 		List<Product> productList = productDao.getAllProduct();
 		List<Category> categorylist = categoryDao.CategoryList();
 		List<Supplier> supplierlist = supplierDao.SupplierList();
@@ -80,7 +84,6 @@ public class AdminController implements ServletContextAware {
 
 		boolean isProductClicked = true;
 		mav.addObject("isProductClicked", isProductClicked);
-		
 		mav.addObject("categorylist", categorylist);
 		mav.addObject("ProductList", productList);
 		mav.addObject("supplierlist", supplierlist);
@@ -96,6 +99,7 @@ public class AdminController implements ServletContextAware {
 			@RequestParam(value = "image", required = false) MultipartFile image) {
 		logger.info(" Admin-AddProduct (goToAddProduct POST method) begins here! ");
 
+		//Following code snippet is responsible for uploading an product Image 
 		if (!image.isEmpty()) {
 			try {
 				validateImage(image);
@@ -107,6 +111,7 @@ public class AdminController implements ServletContextAware {
 			}
 
 			try {
+				//saves as 9.jpg if product id is 9.
 				saveImage(product.getProductId() + ".jpg", image);
 			} catch (IOException e) {
 				result.reject(e.getMessage());
@@ -122,7 +127,7 @@ public class AdminController implements ServletContextAware {
 
 		return modelAndView;
 	}
-
+   // this method is responsible for editing/updating product 
 	@RequestMapping(value = "/edit/{Id}", method = RequestMethod.POST)
 	public ModelAndView updation(@PathVariable("Id") int productId, @RequestParam(value = "productName") String productName,
 		@RequestParam(value = "quantity") int quantity,@RequestParam(value = "price") float price,@RequestParam(value = "description") String description,
@@ -143,7 +148,7 @@ public class AdminController implements ServletContextAware {
 		logger.info(" Admin-EditProduct (Updation method) ends here! ");
 		return modelAndView;
 	}
-
+   // this method work whenenver admin wants to delete a product
 	@RequestMapping(value = "/delete/{productId}", method = RequestMethod.GET)
 	public ModelAndView deleteproduct(@PathVariable int productId) {
 		logger.info(" Admin-DeleteProduct (deleteproduct method) begins here! ");
@@ -158,7 +163,7 @@ public class AdminController implements ServletContextAware {
 	
 	 /*=================Admin-Category-CRUD========================*/
 	
-
+	// when admin wants to see the pre-added categories , this method will hit .
 	@RequestMapping(value = "/Categories")
 	public ModelAndView Categories() {
 		logger.info(" Admin-Categories (Categories method) begins here! ");
@@ -169,7 +174,7 @@ public class AdminController implements ServletContextAware {
 		logger.info(" Admin-Categories (Categories method) ends here! ");
 		return mav;
 	}
-
+	//This method is responsible for adding new category
 	@RequestMapping(value = "/addCategory")
 	public ModelAndView goToAddCategory() {
 		logger.info(" Admin-AddCategory (goToAddCategory method) begins here! ");
@@ -182,7 +187,7 @@ public class AdminController implements ServletContextAware {
 		logger.info(" Admin-AddCategory (goToAddCategory method) ends here! ");
 		return mav;
 	}
-
+	
 	@RequestMapping(value = "/addCategory", method = RequestMethod.POST)
 	public ModelAndView ForAddingCategory(@ModelAttribute("Category") Category category, BindingResult result) {
 		logger.info(" Admin-AddCategory (forAddingCategory - POST method) begins here! ");
@@ -200,7 +205,7 @@ public class AdminController implements ServletContextAware {
 		}
 		
 	}
-
+	//This method is responsible for editing the category
 	@RequestMapping(value = "/editC/{categoryId}", method = RequestMethod.POST)
 	public ModelAndView updationCategory(@PathVariable("categoryId") int categoryId,
 			@ModelAttribute("category") Category category) { 
@@ -211,7 +216,7 @@ public class AdminController implements ServletContextAware {
 		logger.info(" Admin-EDITCategory (updationCategory - POST method) ends here! ");
 		return modelAndView;
 	}
-
+	//this method is responsible for deleting a category
 	@RequestMapping(value = "/deleteC/{categoryId}", method = RequestMethod.GET)
 	public ModelAndView deleteCategory(@PathVariable int categoryId) {
 		logger.info(" Admin-DeleteCategory (deleteCategory - GET method) begins here! ");
@@ -226,7 +231,7 @@ public class AdminController implements ServletContextAware {
 	
 	/*===========================Admin-Supplier-CRUD================*/
 	 
-
+	
 	@RequestMapping(value = "/Suppliers")
 	public ModelAndView Suppliers() {
 		logger.info(" Admin-Suppliers (Suppliers - GET method) begins here! ");
@@ -237,7 +242,7 @@ public class AdminController implements ServletContextAware {
 		logger.info(" Admin-Suppliers (Suppliers - GET method) ends here! ");
 		return mav;
 	}
-
+	//Responsible for adding new supplier
 	@RequestMapping(value = "/addSupplier")
 	public ModelAndView goToAddSupplier() {
 		logger.info(" Admin-goToAddSupplier (goToAddSupplier - GET method) begins here! ");
@@ -266,7 +271,7 @@ public class AdminController implements ServletContextAware {
 			return modelAndView;
 		}
 	}
-
+	//Responsible for editing supplier 
 	@RequestMapping(value = "/editS/{supplierId}", method = RequestMethod.POST)
 	public ModelAndView updationSupplier(@PathVariable("supplierId") int supplierId,
 			@ModelAttribute("supplier") Supplier supplier) { 
@@ -277,7 +282,7 @@ public class AdminController implements ServletContextAware {
 		logger.info(" Admin-updationSupplier (updationSupplier - POST method) ends here! ");
 		return modelAndView;
 	}
-
+	//Responsible for deleting supplier
 	@RequestMapping(value = "/deleteS/{supplierId}", method = RequestMethod.GET)
 	public ModelAndView deleteSupplier(@PathVariable int supplierId) {
 		logger.info(" Admin-deleteSupplier (deleteSupplier - GET method) begins here! ");
@@ -295,17 +300,17 @@ public class AdminController implements ServletContextAware {
 		this.servletContext = servletContext;
 
 	}
-
+	
 	private void validateImage(MultipartFile image) {
 		if (!image.getContentType().equals("image/jpeg")) {
 			throw new RuntimeException("Only JPG images are accepted");
 		}
 	}
-
+	//Save product image to /WEB-INF/resources/images/ directory
 	private void saveImage(String filename, MultipartFile image) throws RuntimeException, IOException {
 		try {
 			File file = new File(servletContext.getRealPath("/") + "/WEB-INF/resources/images/" + filename);
-
+			
 			FileUtils.writeByteArrayToFile(file, image.getBytes());
 			System.out.println("Go to the location:  " + file.toString()
 					+ " on your computer and verify that the image has been stored.");
@@ -313,5 +318,8 @@ public class AdminController implements ServletContextAware {
 			throw e;
 		}
 	}
-
+	
+	
+	/*==================================================================*/
+	
 }

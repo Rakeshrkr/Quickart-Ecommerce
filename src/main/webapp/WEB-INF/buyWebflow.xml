@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd"
+                          start-state="buyNow">
+                     
+<var name="billingAddress" class="com.ecommerce.quickart.model.BillingAddress"/>
+<var name="shippingAddress" class="com.ecommerce.quickart.model.ShippingAddress"/>
+<var name="order" class="com.ecommerce.quickart.model.Order"/>
+<var name="cart" class="com.ecommerce.quickart.model.Cart"/>
+<var name="cardDetails" class="com.ecommerce.quickart.model.CardDetails"/>
+
+<on-start>
+	<evaluate expression="orderHandler.initFlow()" result="flowScope.order"/>
+</on-start>
+
+<view-state id="buyNow" view="views/user/billingAddress.jsp"  model="billingAddress">
+	<transition on="submitBillingAddress" to="billingAdd"></transition>
+</view-state>
+
+<action-state id="billingAdd">
+	<evaluate expression="orderHandler.addBillingAddress(flowScope.order,billingAddress)" ></evaluate>
+	<transition on="positive" to="shippingAddView"/>  
+</action-state>
+
+<view-state id="shippingAddView" view="views/user/shippingAddress.jsp"  model="shippingAddress">
+	<transition on="submitShippingAddress" to="shippingAddMethod"></transition>
+</view-state>
+
+<action-state id="shippingAddMethod">
+	<evaluate expression="orderHandler.addShippingAddress(flowScope.order,shippingAddress)"></evaluate>
+	<transition on="positive" to="cardDetails"/>   
+</action-state>
+
+
+<view-state id="cardDetails" view="views/user/cardDetails.jsp"  model="cardDetails">
+	<transition on="submitCardDetails" to="addPay"></transition>
+</view-state>
+
+<action-state id="addPay">
+	<evaluate expression="orderHandler.addCardDetails(flowScope.order,cardDetails)"></evaluate>
+	
+	<transition on="positive" to="orderSummaryView" />   
+</action-state>
+
+
+<view-state id="orderSummaryView" view="views/user/orderSummary.jsp"  >
+	<transition on="goToIndex" to="orderConfirm"></transition>
+</view-state>
+
+<action-state id="orderSummaryAction">
+	<evaluate expression="orderWebflow.confirmOrder(flowScope.order)"></evaluate>
+	<transition on="positive" to="orderConrmfirm"/>   
+</action-state>
+
+<end-state id="toCart" view ="user/orderSummary"></end-state>
+<end-state id="orderConfirm" view ="views/index.jsp"></end-state>
+<end-state id="toIndex" view ="externalRedirect:contextRelative:/index"></end-state>
+
+<global-transitions>
+	<transition on="cancel" to="toCart"/>
+</global-transitions>
+
+</flow>
