@@ -2,7 +2,7 @@
 
 <div class="container" style="margin-left: 38%">
 	<div class="row">
-	<h3 style="color:green">Please provide card details for payment.</h3>
+		<h3 style="color: green">Please provide card details for payment.</h3>
 		<div class="col-xs-12 col-md-4" style="align: center">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -41,9 +41,18 @@
 										id="cV" placeholder="CV" />
 								</div>
 							</div>
+
 							<div class="col-sm-9 col-sm-offset-3">
 								<input type="submit" name="_eventId_submitCardDetails"
-									value="Pay and Confirm Order" class="btn btn-primary btn-block">
+									value="Pay and Confirm Order" class="btn btn-success btn-block">
+									<br>
+								<div class="btn-group">
+									<button type="submit" name="_eventId_goToShippingAddress"
+										class="btn btn-primary">Back</button>
+									<a type="button" href="viewCartItems"
+										class="btn btn-warning">Cancel</a>
+
+								</div>
 							</div>
 						</div>
 					</form:form>

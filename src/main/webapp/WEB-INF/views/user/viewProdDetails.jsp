@@ -27,7 +27,7 @@
 				<a href="addToCart/${product.productId}" style="margin-right:3%" class="btn btn-primary  " role="button" aria-pressed="true">Add to Cart</a>
 				<!-- <a href="buyNow" style="margin-left:3%" class="btn btn-primary  " role="button" aria-pressed="true">Buy Now</a> -->
 				<a class="btn btn-md btn-success" style="text-decoration: none"
-							href="./buyNow">Buy Now</a>
+							href="buyNow/${product.productId}">Buy Now</a>
 			</div>
 
 		</div>

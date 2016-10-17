@@ -43,8 +43,7 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 		<!-- Id is mapped to invoke the flow -->
 		<webflow-config:flow-location id="checkout"
 			path="/cartWebflow.xml" />
-		<webflow-config:flow-location id="checkout"
-			path="/buyWebflow.xml" />
+		
 	</webflow-config:flow-registry>
 
 	<!-- <webflow-config:flow-builder-services id="flowBuilderServices" view-factory-creator="viewFactoryCreator" 

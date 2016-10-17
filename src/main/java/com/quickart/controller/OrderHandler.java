@@ -49,7 +49,8 @@ public class OrderHandler {
 		List<Cart> cartList = (List<Cart>) cartDao.listCart(userId);
 		order.setUserId(userId);
 		order.setCartList(cartList);
-		order.setTotalRs(cartDao.getTotalRs(userId));
+		Double totalRs = cartDao.getTotalRs(userId) ;
+		order.setTotalRs(totalRs);
 		return order ;
 	}
 	
@@ -77,6 +78,14 @@ public class OrderHandler {
 			e.printStackTrace();
 			return "negative" ;
 		}
+		return "positive";
+	}
+	
+	public String endFlow(){
+		
+		String userId = (String) httpSession.getAttribute("user");
+		
+		cartDao.updateCart(userId);
 		return "positive";
 	}
 

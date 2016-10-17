@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,7 @@ import com.ecommerce.quickart.model.Category;
 import com.ecommerce.quickart.model.Product;
 import com.ecommerce.quickart.model.Supplier;
 import com.ecommerce.quickart.model.UserDetails;
-
+@Controller
 public class CartController {
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
@@ -69,7 +70,7 @@ public class CartController {
 		modelAndView.addObject("product", product);
 		return modelAndView;
 	}
-	
+	/*
 	@RequestMapping(value = "viewProds/buyNow")
 	public ModelAndView goToBilling(@ModelAttribute("billingAddress") BillingAddress billingAddress) {
 		
@@ -78,7 +79,7 @@ public class CartController {
 		modelAndView.addObject("product", product);
 		
 		return modelAndView;
-	}
+	}*/
 	
 
 	@RequestMapping(value = "viewProds/shippingAddress")
@@ -128,6 +129,37 @@ public class CartController {
 		return modelAndView;
 	}
 	
+	
+	
+	
+	@RequestMapping(value = "viewProds/buyNow/{productId}")
+	public ModelAndView buyNow(@PathVariable(value="productId") int productId,
+			@ModelAttribute("cart") Cart cart,
+			@ModelAttribute("product") Product product) {
+		product = productDao.getProduct(productId);
+		String userId = session.getAttribute("user").toString();
+		cart.setUserId(userId);
+		cart.setPrice(product.getPrice());
+		cart.setProductName(product.getProductName());
+		cart.setQuantity(1);
+		cart.setStatus('N');
+		
+		cartDao.saveCart(cart);
+		
+		List<Cart> cartList = cartDao.listCart(userId);
+		int cartItemSize = cartList.size();
+		
+		session.setAttribute("cartItemSize", cartItemSize);
+		System.out.println("CARTSIZE" + cartList.size());
+		
+		ModelAndView modelAndView = new ModelAndView("user/cart");
+		modelAndView.addObject("product", product);
+		modelAndView.addObject("cartList", cartList);
+		modelAndView.addObject("TotalRs", cartDao.getTotalRs(userId));
+		return modelAndView;
+	}
+	
+	
 	@RequestMapping(value = {"viewCartItems","viewProds/viewCartItems"})
 	public ModelAndView goToCartItems() {
 		
@@ -166,11 +198,11 @@ public class CartController {
 		ModelAndView modelAndView = new ModelAndView("redirect:/checkout");
 		return modelAndView;
 	}
-	@RequestMapping(value = "/viewProds/buyNow")
+	/*@RequestMapping(value = "/viewProds/buyNow")
 	public ModelAndView goToBillingAddres(@ModelAttribute("billingAddress") BillingAddress billingAddress) {
 		ModelAndView modelAndView = new ModelAndView("redirect:/checkout");
 		return modelAndView;
-	}
+	}*/
 	
 	
 }

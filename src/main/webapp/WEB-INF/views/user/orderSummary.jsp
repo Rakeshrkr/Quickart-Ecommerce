@@ -14,9 +14,11 @@
 					<div class="panel panel-default height">
 						<div class="panel-heading">Billing Details</div>
 						<div class="panel-body">
-							<strong>${order.billingAddress.fullName} </strong><br> 1111
-							Army Navy Drive<br> Arlington<br> VA<br> <strong>22
-								203</strong><br>
+							<strong>${billingAddress.fullName} </strong><br>
+							${billingAddress.addressLine}<br>
+							${billingAddress.city_Town}<br>
+							${billingAddress.state_Province_RegionNumber }<br> <strong>${billingAddress.zip_PostalCode }</strong><br>
+							<strong>${billingAddress.country }</strong>
 						</div>
 					</div>
 				</div>
@@ -25,7 +27,8 @@
 						<div class="panel-heading">Payment Information</div>
 						<div class="panel-body">
 							<strong>Card Name:</strong> Visa<br> <strong>Card
-								Number:</strong> ***** 332<br> <strong>Exp Date:</strong> 09/2020<br>
+								Number:</strong>${cardDetails.cardNumber }<br> <strong>Exp
+								Date:</strong> ${cardDetails.mM }/${cardDetails.yY }<br>
 						</div>
 					</div>
 				</div>
@@ -43,8 +46,11 @@
 					<div class="panel panel-default height">
 						<div class="panel-heading">Shipping Address</div>
 						<div class="panel-body">
-							<strong>David Peere:</strong><br> 1111 Army Navy Drive<br>
-							Arlington<br> VA<br> <strong>22 203</strong><br>
+							<strong>${shippingAddress.fullName} </strong><br>
+							${shippingAddress.addressLine}<br>
+							${shippingAddress.city_Town}<br>
+							${shippingAddress.state_Province_RegionNumber }<br> <strong>${shippingAddress.zip_PostalCode }</strong><br>
+							<strong>${shippingAddress.country }</strong>
 						</div>
 					</div>
 				</div>
@@ -71,52 +77,46 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>Samsung Galaxy S5</td>
-									<td class="text-center">$900</td>
-									<td class="text-center">1</td>
-									<td class="text-right">$900</td>
-								</tr>
-								<tr>
-									<td>Samsung Galaxy S5 Extra Battery</td>
-									<td class="text-center">$30.00</td>
-									<td class="text-center">1</td>
-									<td class="text-right">$30.00</td>
-								</tr>
-								<tr>
-									<td>Screen protector</td>
-									<td class="text-center">$7</td>
-									<td class="text-center">4</td>
-									<td class="text-right">$28</td>
-								</tr>
+
+								<c:forEach var="cart" items="${order.cartList}">
+
+									<tr>
+										<td>${cart.productName }</td>
+										<td class="text-center">${cart.price}</td>
+										<td class="text-center">${cart.quantity}</td>
+										<td class="text-right">${cart.price * cart.quantity}</td>
+									</tr>
+
+								</c:forEach>
+						
 								<tr>
 									<td class="highrow"></td>
 									<td class="highrow"></td>
 									<td class="highrow text-center"><strong>Subtotal</strong></td>
-									<td class="highrow text-right">$958.00</td>
+									<td class="highrow text-right">${order.totalRs }</td>
 								</tr>
 								<tr>
 									<td class="emptyrow"></td>
 									<td class="emptyrow"></td>
 									<td class="emptyrow text-center"><strong>Shipping</strong></td>
-									<td class="emptyrow text-right">$20</td>
+									<td class="emptyrow text-right">30</td>
 								</tr>
 								<tr>
-									<td class="emptyrow">
-									<form:form role="form" >
-										
-									<div class="form-group">
-											<div class="col-sm-9 col-sm-offset-3" style="text-align:center">
-											<h3>Thank You.<br>Order Has Been Confirmed.</h3>
-												<input type="submit" name="_eventId_goToIndex"
-													value="save" class="btn btn-primary btn-block">
+									<td class="emptyrow"><form:form role="form">
+
+											<div class="form-group">
+												<div class="col-sm-9 col-sm-offset-3"
+													style="text-align: center">
+													<input type="submit" name="_eventId_goToCardDetails" value="Back"
+														class="btn btn-primary btn-block">
+													<input type="submit" name="_eventId_goToIndex" value="Confirm Order and Continue Shopping"
+														class="btn btn-primary btn-block">
+												</div>
 											</div>
-										</div>
-										</form:form>
-										</td>
+										</form:form></td>
 									<td class="emptyrow"></td>
 									<td class="emptyrow text-center"><strong>Total</strong></td>
-									<td class="emptyrow text-right">$978.00</td>
+									<td class="emptyrow text-right">&#8377;${order.totalRs +30}</td>
 								</tr>
 							</tbody>
 						</table>

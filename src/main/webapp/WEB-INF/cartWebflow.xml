@@ -13,6 +13,7 @@
 
 <on-start>
 	<evaluate expression="orderHandler.initFlow()" result="flowScope.order"/>
+	
 </on-start>
 
 <view-state id="checkout" view="views/user/billingAddress.jsp"  model="billingAddress">
@@ -26,6 +27,7 @@
 
 <view-state id="shippingAddView" view="views/user/shippingAddress.jsp"  model="shippingAddress">
 	<transition on="submitShippingAddress" to="shippingAddMethod"></transition>
+	<transition on="goToBillingAddress" to="checkout"></transition>
 </view-state>
 
 <action-state id="shippingAddMethod">
@@ -36,6 +38,8 @@
 
 <view-state id="cardDetails" view="views/user/cardDetails.jsp"  model="cardDetails">
 	<transition on="submitCardDetails" to="addPay"></transition>
+	<transition on="goToShippingAddress" to="shippingAddView"></transition>
+	<transition on="goToCheckOut" to="checkout"></transition>
 </view-state>
 
 <action-state id="addPay">
@@ -46,12 +50,13 @@
 
 
 <view-state id="orderSummaryView" view="views/user/orderSummary.jsp"  >
-	<transition on="goToIndex" to="orderConfirm"></transition>
+	<transition on="goToIndex" to="orderSummaryAction"></transition>
+	<transition on="goToCardDetails" to="cardDetails"></transition>
 </view-state>
 
 <action-state id="orderSummaryAction">
-	<evaluate expression="orderWebflow.confirmOrder(flowScope.order)"></evaluate>
-	<transition on="positive" to="orderConrmfirm"/>   
+	<evaluate expression="orderHandler.endFlow()"/>
+	<transition on="positive" to="toIndex"/>   
 </action-state>
 
 <end-state id="toCart" view ="user/orderSummary"></end-state>

@@ -74,6 +74,11 @@
 				<input type="submit" name="_eventId_submitShippingAddress"
 					value="save" class="btn btn-primary btn-block">
 			</div>
+			<br>
+			<div class="col-sm-9 col-sm-offset-3">
+				<input type="submit" name="_eventId_goToBillingAddress"
+					value="Back" class="btn btn-primary btn-block">
+			</div>
 		</div>
 
 	</form:form>

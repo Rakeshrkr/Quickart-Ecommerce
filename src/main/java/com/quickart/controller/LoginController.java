@@ -273,7 +273,7 @@ public class LoginController {
 	}
 	
 	/*====================================================================*/
-	
+	/*
 	@RequestMapping(value = "viewProds/{productId}", method = RequestMethod.GET)
 	public ModelAndView viewProduct(@PathVariable int productId) {
 		product = productDao.getProduct(productId);
@@ -281,7 +281,7 @@ public class LoginController {
 		modelAndView.addObject("product", product);
 		return modelAndView;
 	}
-	/*
+	
 	@RequestMapping(value = "viewProds/buyNow")
 	public ModelAndView goToBilling(@ModelAttribute("billingAddress") BillingAddress billingAddress) {
 		
@@ -290,7 +290,7 @@ public class LoginController {
 		modelAndView.addObject("product", product);
 		
 		return modelAndView;
-	}*/
+	}
 	
 
 	@RequestMapping(value = "viewProds/shippingAddress")
@@ -314,7 +314,7 @@ public class LoginController {
 	}
 	
 	//This method invokes when logged in user add a product to cart
-	@RequestMapping(value = "viewProds/addToCart/{productId}")
+	@RequestMapping(value = "viewProds/buyNow/{productId}")
 	public ModelAndView addToCart(@PathVariable(value="productId") int productId,
 			@ModelAttribute("cart") Cart cart,
 			@ModelAttribute("product") Product product) {
@@ -357,11 +357,11 @@ public class LoginController {
 		modelAndView.addObject("TotalRs", cartDao.getTotalRs(userId));
 		return modelAndView;
 	}
-	/*@RequestMapping(value = "checkout")
+	@RequestMapping(value = "checkout")
 	public ModelAndView goToBillingAddress(@ModelAttribute("billingAddress") BillingAddress billingAddress) {
 		ModelAndView modelAndView = new ModelAndView("user/billingAddress");
 		return modelAndView;
-	}*/ 
+	} 
 	
 	//Responsible for deleting the cart item
 	@RequestMapping(value = "/cart/delete/{cartId}")
@@ -376,5 +376,5 @@ public class LoginController {
 		
 		return modelAndView;
 	}
-	
+	*/
 }

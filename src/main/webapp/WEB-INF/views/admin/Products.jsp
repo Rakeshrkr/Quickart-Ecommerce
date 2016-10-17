@@ -44,9 +44,9 @@
 												<form:select class="form-control"
 													Style="background-color: #cce6ff;" 
 													path="category">
-													<form:option value="NONE"
+													<form:option value="NONE" 
 														label="---------- Select ----------" />
-													<form:options items="${categorylist}" />
+													<form:options path="category" items="${categorylist}" />
 												</form:select>
 											</div></td>
 										<td><div class="form-group" style="padding: 20px">
@@ -56,7 +56,7 @@
 													path="supplier">
 													<form:option value="NONE"
 														label="---------- Select ----------" />
-													<form:options items="${supplierlist}"></form:options>
+													<form:options path="supplier" items="${supplierlist}"></form:options>
 
 												</form:select>
 											</div></td>
