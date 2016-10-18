@@ -25,8 +25,10 @@
 										<td>${cart.productName}</td>
 										<td>&#8377;${cart.price}</td>
 										<td>${cart.quantity}</td>
+<%-- <c:url value="/css/MyStyleSheet.css" /> --%>
+<%-- href="cart/delete/${cart.cartId}" --%>
 
-										<td><a href="cart/delete/${cart.productName}"
+										<td><a href="<c:url value="/cart/delete/${cart.cartId}" />"
 											style="text-decoration: none"
 											class="button btn-sm btn-danger pull-right">Remove from
 												cart</a></td>
@@ -44,7 +46,7 @@
 				<div class="panel-footer">
 					<div class="text-right">
 						<a class="btn btn-md btn-success" style="text-decoration: none"
-							href="checkout">Check-out</a>
+							href="/quickart/viewProds/checkout">Check-out</a>
 					</div>
 				</div>
 			</div>

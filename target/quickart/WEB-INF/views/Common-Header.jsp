@@ -65,7 +65,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span>
 			</button>
 			<!--navbar toggle button ends-->
-			<b><a href="index" class="navbar-brand">Quickart</a></b>
+			<b><a href="<c:url value="/index"/>" class="navbar-brand">Quickart</a></b>
 		</div>
 		<!--navbar header ends-->
 		<div class="collapse nav nav-collapse navbar-collapse"

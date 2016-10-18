@@ -18,10 +18,12 @@ http://www.springframework.org/schema/security/spring-security-4.1.xsd">
 		<security:intercept-url pattern="/viewProds/buyNow/**" access="hasRole('ROLE_USER')" />
 		<security:intercept-url pattern="/viewProds/addToCart/**" access="hasRole('ROLE_USER')" />
 		<security:intercept-url pattern="/user/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />  
+		<security:intercept-url pattern="/checkout/**" access="hasAnyRole('ROLE_USER')" />  
+		<security:intercept-url pattern="/cart/**" access="hasAnyRole('ROLE_USER')" />  
 		<security:form-login login-page="/login"  username-parameter="name" password-parameter="password" 
-		  default-target-url="/index" authentication-failure-url="/loginError" 
-		  /> 
-		  
+		  default-target-url="/index" authentication-failure-url="/loginError" /> 
+		   <security:logout logout-success-url='/' />
+        <security:access-denied-handler error-page="/accessdenied"/>
 		  <security:logout/>
 		<security:csrf disabled="true"/> 
 	</security:http>

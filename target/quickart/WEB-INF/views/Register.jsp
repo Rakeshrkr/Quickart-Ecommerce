@@ -83,15 +83,8 @@
 			</div>
 		</div>
 
-		<div class="form-group">
-			<div class="col-sm-9 col-sm-offset-3">
-				<div class="checkbox">
-					<label> <input type="checkbox">I accept <a href="#">terms
-							and conditions</a>
-					</label>
-				</div>
-			</div>
-		</div>
+		<br>
+		<br>
 		<!-- /.form-group -->
 		<div class="form-group">
 			<div class="col-sm-9 col-sm-offset-3">

@@ -91,9 +91,9 @@ public class AdminController implements ServletContextAware {
 	}
 
 	@RequestMapping(value = "/addProduct", method = RequestMethod.POST)
-	public ModelAndView ForAddingProducts(@Valid @ModelAttribute("Product") Product product, BindingResult result,
-			@RequestParam(value = "category" ,required= false) String category1, @RequestParam(value = "supplier" ,required = false) String supplier1,
-			@RequestParam(value = "image", required = false) MultipartFile image) {
+	public ModelAndView ForAddingProducts(@Valid @ModelAttribute("Product") Product product,
+			@RequestParam(value = "category" ) String category1, @RequestParam(value = "supplier" ) String supplier1, BindingResult result ,
+			@RequestParam(value = "image", required=false) MultipartFile image) {
 		logger.info(" Admin-AddProduct (goToAddProduct POST method) begins here! ");
 
 		if (!image.isEmpty()) {
@@ -107,7 +107,7 @@ public class AdminController implements ServletContextAware {
 			}
 
 			try {
-				saveImage(product.getProductId() + ".jpg", image);
+				saveImage(product.getProductId() + ".jpeg", image);
 			} catch (IOException e) {
 				result.reject(e.getMessage());
 				ModelAndView modelAndView = new ModelAndView("redirect:/admin/addProduct");
