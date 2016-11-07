@@ -25,9 +25,6 @@
 										<td>${cart.productName}</td>
 										<td>&#8377;${cart.price}</td>
 										<td>${cart.quantity}</td>
-<%-- <c:url value="/css/MyStyleSheet.css" /> --%>
-<%-- href="cart/delete/${cart.cartId}" --%>
-
 										<td><a href="<c:url value="/cart/delete/${cart.cartId}" />"
 											style="text-decoration: none"
 											class="button btn-sm btn-danger pull-right">Remove from

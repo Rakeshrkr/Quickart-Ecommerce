@@ -8,7 +8,7 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				
-				<img src="<c:url value="/images/Quickart.jpg"></c:url>"
+				<img src="<c:url value="/images/${product.productId}.jpeg"></c:url>"
 					class="image-responsive" alt="Quickartlogo" />
 					<h4>${product.productName}</h4>
 			</div>

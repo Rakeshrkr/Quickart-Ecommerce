@@ -14,7 +14,7 @@
 							<form:label for="cardNumber" path="cardNumber"> CARD NUMBER</form:label>
 							<div class="input-group">
 								<form:input type="text" path="cardNumber" class="form-control"
-									id="cardNumber" placeholder="Valid Card Number" />
+									id="cardNumber" placeholder="Valid Card Number" required="true"/>
 								<span class="input-group-addon"><span
 									class="glyphicon glyphicon-lock"></span></span>
 							</div>
@@ -25,12 +25,12 @@
 									<form:label for="mM" path="mM"> EXPIRY Month</form:label>
 									<div class="col-xs-6 col-lg-6 pl-ziro">
 										<form:input type="text" class="form-control" path="mM" id="mM"
-											placeholder="MM" />
+											placeholder="MM" required="true"/>
 									</div>
 									<form:label for="yY" path="yY"> Year</form:label>
 									<div class="col-xs-6 col-lg-6 pl-ziro">
 										<form:input path="yY" type="text" class="form-control" id="yY"
-											placeholder="YY" />
+											placeholder="YY" required="true" />
 									</div>
 								</div>
 							</div>
@@ -38,7 +38,7 @@
 								<div class="form-group">
 									<form:label path="cV" for="cV"> CV CODE</form:label>
 									<form:input path="cV" type="password" class="form-control"
-										id="cV" placeholder="CV" />
+										id="cV" placeholder="CV" required="true"/>
 								</div>
 							</div>
 

@@ -65,7 +65,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span>
 			</button>
 			<!--navbar toggle button ends-->
-			<b><a href="<c:url value="/index"/>" class="navbar-brand">Quickart</a></b>
+			<b><a href="<c:url value="/"/>" class="navbar-brand">Quickart</a></b>
 		</div>
 		<!--navbar header ends-->
 		<div class="collapse nav nav-collapse navbar-collapse"
@@ -75,12 +75,12 @@
 
 				<c:if test="${empty pageContext.request.userPrincipal}">
 
-					<li><a href="ContactUs"><span
+					<li><a href="<c:url value="/ContactUs"/>"><span
 							class="glyphicon glyphicon-earphone"></span> Contact Us</a></li>
-					<li><a href="addUser"><span
+					<li><a href="<c:url value="/addUser"/>"><span
 							class="glyphicon glyphicon-user" id="signupbutton"></span> Sign
 							Up</a></li>
-					<li><a href="login"><span
+					<li><a href="<c:url value="/login"/>"><span
 							class="glyphicon glyphicon-log-in" id="loginbutton"></span> Login</a></li>
 				</c:if>
 
@@ -91,7 +91,7 @@
 
 					<c:if test="${pageContext.request.isUserInRole('ROLE_USER')}">
 
-						<li><a style="color: white" href="viewCartItems" id="cart"> <span
+						<li><a style="color: white" href="<c:url value="/viewCartItems"/>" id="cart"> <span
 								class="glyphicon glyphicon-shopping-cart"></span>Cart<span
 								class="badge">${cartItemSize}</span></a></li>
 
@@ -104,17 +104,17 @@
 							${user}<b class="caret"></b>
 					</a>
 						<ul class="dropdown-menu">
-							<li><a href="logout">LogOut</a></li>
+							<li><a href="<c:url value="logout"/>">LogOut</a></li>
 
 						</ul></li>
 				</c:if>
 			</ul>
 
 			<ul style="font-size: 0.9vw" class="nav navbar-nav">
-				<li><a href="/quickart">Home</a>
-				<li><a href="/quickart">Gallary</a>
-				<li><a href="/quickart">Shopping</a>
-				<li><a href="/quickart">About Us</a>
+				<li><a href="<c:url value="/#home"/>">Home</a>
+				<li><a href="<c:url value="/#gallary"/>">Gallary</a>
+				<li><a href="<c:url value="/#shopping"/>">Shopping</a>
+				<li><a href="<c:url value="/#footer"/>">About Us</a>
 			</ul>
 		</div>
 		<!--navbar collapse items ends-->

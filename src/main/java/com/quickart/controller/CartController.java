@@ -70,16 +70,7 @@ public class CartController {
 		modelAndView.addObject("product", product);
 		return modelAndView;
 	}
-	/*
-	@RequestMapping(value = "viewProds/buyNow")
-	public ModelAndView goToBilling(@ModelAttribute("billingAddress") BillingAddress billingAddress) {
-		
-		
-		ModelAndView modelAndView = new ModelAndView("user/billingAddress");
-		modelAndView.addObject("product", product);
-		
-		return modelAndView;
-	}*/
+	
 	
 
 	@RequestMapping(value = "viewProds/shippingAddress")
@@ -125,7 +116,6 @@ public class CartController {
 		ModelAndView modelAndView = new ModelAndView("redirect:/viewProds/{productId}");
 		modelAndView.addObject("product", product);
 		modelAndView.addObject("cartList", cartList);
-		//modelAndView.addObject("TotalRs", cartDao.getTotalRs(userId));
 		return modelAndView;
 	}
 	
@@ -152,10 +142,9 @@ public class CartController {
 		session.setAttribute("cartItemSize", cartItemSize);
 		System.out.println("CARTSIZE" + cartList.size());
 		
-		ModelAndView modelAndView = new ModelAndView("user/cart");
+		ModelAndView modelAndView = new ModelAndView("redirect:/viewCartItems");
 		modelAndView.addObject("product", product);
 		modelAndView.addObject("cartList", cartList);
-		modelAndView.addObject("TotalRs", cartDao.getTotalRs(userId));
 		return modelAndView;
 	}
 	
@@ -175,16 +164,10 @@ public class CartController {
 		modelAndView.addObject("TotalRs", cartDao.getTotalRs(userId));
 		return modelAndView;
 	}
-	/*@RequestMapping(value = "checkout")
-	public ModelAndView goToBillingAddress(@ModelAttribute("billingAddress") BillingAddress billingAddress) {
-		ModelAndView modelAndView = new ModelAndView("user/billingAddress");
-		return modelAndView;
-	}*/
+	
 	@RequestMapping(value = "/cart/delete/{cartId}")
 	public ModelAndView deleteCartItem(@PathVariable(value="cartId") int cartId,@ModelAttribute("cart") Cart cart,
 			@ModelAttribute("product") Product product) {
-		//String userId = session.getAttribute("user").toString();
-		//cartDao.getCartbyId(userId, cartId);
 		cartDao.deleteCart(cartId);
 		
 		ModelAndView modelAndView = new ModelAndView("redirect:/viewCartItems");
@@ -198,11 +181,7 @@ public class CartController {
 		ModelAndView modelAndView = new ModelAndView("redirect:/checkout");
 		return modelAndView;
 	}
-	/*@RequestMapping(value = "/viewProds/buyNow")
-	public ModelAndView goToBillingAddres(@ModelAttribute("billingAddress") BillingAddress billingAddress) {
-		ModelAndView modelAndView = new ModelAndView("redirect:/checkout");
-		return modelAndView;
-	}*/
+	
 	
 	
 }

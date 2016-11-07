@@ -1,5 +1,5 @@
 <hr>
-
+<div id="shopping">
 <c:forEach items="${productByCategoryList}" var="catProducts">
 
 	<div class="container" id="shopping">
@@ -15,7 +15,7 @@
 								<h6>${prod.category.categoryName}</h6>
 								<a href="viewProds/${ prod.productId}"
 									value="${product.productId}"><img
-									src="<c:url value="images/${prod.productId}.jpeg"></c:url>"
+									src="<c:url value="/images/${prod.productId}.jpeg"></c:url>"
 									class="img-responsive" alt="${prod.productName}"></a>
 								<h6>${prod.price}Rs.</h6>
 							</div>
@@ -33,4 +33,5 @@
 	<hr>
 
 </c:forEach>
+</div>
 <!--Furniture idems ends here-->

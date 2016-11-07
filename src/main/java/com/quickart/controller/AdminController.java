@@ -91,8 +91,9 @@ public class AdminController implements ServletContextAware {
 	}
 
 	@RequestMapping(value = "/addProduct", method = RequestMethod.POST)
-	public ModelAndView ForAddingProducts(@Valid @ModelAttribute("Product") Product product,
-			@RequestParam(value = "category" ) String category1, @RequestParam(value = "supplier" ) String supplier1, BindingResult result ,
+	public ModelAndView ForAddingProducts(@ModelAttribute("Product") Product product,BindingResult result,
+			
+			@RequestParam(value = "category" ) String category1, @RequestParam(value = "supplier" ) String supplier1,
 			@RequestParam(value = "image", required=false) MultipartFile image) {
 		logger.info(" Admin-AddProduct (goToAddProduct POST method) begins here! ");
 
@@ -101,7 +102,7 @@ public class AdminController implements ServletContextAware {
 				validateImage(image);
 
 			} catch (RuntimeException re) {
-				result.reject(re.getMessage());
+				//result.reject(re.getMessage());
 				ModelAndView modelAndView = new ModelAndView("redirect:/admin/addProduct");
 				return modelAndView;
 			}
@@ -109,7 +110,7 @@ public class AdminController implements ServletContextAware {
 			try {
 				saveImage(product.getProductId() + ".jpeg", image);
 			} catch (IOException e) {
-				result.reject(e.getMessage());
+				//result.reject(e.getMessage());
 				ModelAndView modelAndView = new ModelAndView("redirect:/admin/addProduct");
 				return modelAndView;
 			}

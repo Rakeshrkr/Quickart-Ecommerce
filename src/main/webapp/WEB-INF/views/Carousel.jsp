@@ -13,8 +13,8 @@
     <div class="item active">
       <img src="<c:url value="/images/Men.jpg"></c:url>" alt="Men's Clothing">
        <div class="carousel-caption">
-        <h3>Men's Wearing</h3>
-        <p>A well-tied tie is the first serious step in life.</p>
+        <h3>Modern Equipment</h3>
+        <p>My cell phone is my best friend. It's my lifeline to the outside world.</p>
       </div>
     </div>
 

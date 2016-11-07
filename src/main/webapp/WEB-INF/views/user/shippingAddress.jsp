@@ -15,7 +15,7 @@
 				class="col-sm-3 control-label">Full Name</form:label>
 			<div class="col-sm-9">
 				<form:input path="fullName" type="text" id="fullName"
-					placeholder="eg: Rakesh Kumar" class="form-control" />
+					placeholder="eg: Rakesh Kumar" class="form-control" required="true"/>
 			</div>
 		</div>
 		<div class="form-group">
@@ -23,7 +23,7 @@
 				class="col-sm-3 control-label">Address Line</form:label>
 			<div class="col-sm-9">
 				<form:input path="addressLine" type="text" id="addressLine"
-					placeholder="Address Line" class="form-control" />
+					placeholder="Address Line" class="form-control" required="true"/>
 			</div>
 		</div>
 
@@ -32,7 +32,7 @@
 				class="col-sm-3 control-label">City/ Town</form:label>
 			<div class="col-sm-9">
 				<form:input path="city_Town" type="text" id="city_Town"
-					placeholder="City/Town" class="form-control" />
+					placeholder="City/Town" class="form-control" required="true"/>
 			</div>
 		</div>
 
@@ -44,7 +44,7 @@
 				<form:input type="text" id="state_Province_RegionNumber"
 					path="state_Province_RegionNumber"
 					placeholder="State / Province / Region
-					" class="form-control" />
+					" class="form-control" required="true" />
 			</div>
 		</div>
 
@@ -54,7 +54,7 @@
 				class="col-sm-3 control-label">Zip/ Postal Code</form:label>
 			<div class="col-sm-9">
 				<form:input type="text" id="Zip/Postal Code" path="zip_PostalCode"
-					class="form-control" placeholder="Zip / Postal Code" />
+					class="form-control" placeholder="Zip / Postal Code" required="true"/>
 			</div>
 		</div>
 		<div class="form-group">
@@ -63,7 +63,7 @@
 			<div class="col-sm-9">
 				<form:input type="text" id="country" path="country"
 					placeholder="Country" 
-					 class="form-control" />
+					 class="form-control" required="true"/>
 			</div>
 		</div>
 
